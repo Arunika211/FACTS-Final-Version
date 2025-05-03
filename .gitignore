@@ -1,0 +1,56 @@
+# Ignore Python environments and cache files
+myenv/
+venv/
+env/
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+.env
+.venv
+
+# Ignore build and distribution files
+dist/
+build/
+*.egg-info/
+
+# Ignore Node.js modules in the root project (since we have a separate package.json in facts-dashboard)
+/node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Ignore debug folders and temporary files
+/debug/
+*.tmp
+*.log
+
+# Ignore IDE and editor files
+.idea/
+.vscode/
+*.swp
+*.swo
+.DS_Store
+
+# Don't ignore facts-dashboard build files needed for deployment
+# (facts-dashboard has its own .gitignore for development)
+!facts-dashboard/build/
+!facts-dashboard/out/
+!facts-dashboard/.next/
+
+# Ignore large model files (add back manually)
+# /models/*.pt
+# But keep the directory
+!/models/
+!/models/.gitkeep
+
+# Ignore test data but keep structure
+# /data/*.json
+# But keep the directory
+!/data/
+!/data/.gitkeep
+
+/*
+!facts-dashboard/
+!.gitignore 

@@ -1,0 +1,122 @@
+[
+  {
+    "timestamp": "2025-05-01T14:29:56.532Z",
+    "ternak": "sapi",
+    "aktivitas": "berdiri",
+    "confidence": 0.74,
+    "lokasi": "kandang",
+    "jumlah": 2
+  },
+  {
+    "timestamp": "2025-05-01T13:29:56.532Z",
+    "ternak": "sapi",
+    "aktivitas": "berjalan",
+    "confidence": 0.89,
+    "lokasi": "kandang",
+    "jumlah": 1
+  },
+  {
+    "timestamp": "2025-05-01T12:29:56.532Z",
+    "ternak": "sapi",
+    "aktivitas": "tidur",
+    "confidence": 0.84,
+    "lokasi": "kandang",
+    "jumlah": 3
+  },
+  {
+    "timestamp": "2025-05-01T11:29:56.532Z",
+    "ternak": "sapi",
+    "aktivitas": "berdiri",
+    "confidence": 0.81,
+    "lokasi": "kandang",
+    "jumlah": 1
+  },
+  {
+    "timestamp": "2025-05-01T10:29:56.532Z",
+    "ternak": "sapi",
+    "aktivitas": "tidur",
+    "confidence": 0.93,
+    "lokasi": "kandang",
+    "jumlah": 2
+  },
+  {
+    "timestamp": "2025-05-01T14:29:56.532Z",
+    "ternak": "ayam",
+    "aktivitas": "makan",
+    "confidence": 0.95,
+    "lokasi": "kandang",
+    "jumlah": 3
+  },
+  {
+    "timestamp": "2025-05-01T13:29:56.532Z",
+    "ternak": "ayam",
+    "aktivitas": "tidur",
+    "confidence": 0.94,
+    "lokasi": "kandang",
+    "jumlah": 3
+  },
+  {
+    "timestamp": "2025-05-01T12:29:56.532Z",
+    "ternak": "ayam",
+    "aktivitas": "terbang",
+    "confidence": 0.87,
+    "lokasi": "kandang",
+    "jumlah": 1
+  },
+  {
+    "timestamp": "2025-05-01T11:29:56.532Z",
+    "ternak": "ayam",
+    "aktivitas": "terbang",
+    "confidence": 0.96,
+    "lokasi": "kandang",
+    "jumlah": 2
+  },
+  {
+    "timestamp": "2025-05-01T10:29:56.532Z",
+    "ternak": "ayam",
+    "aktivitas": "tidur",
+    "confidence": 0.81,
+    "lokasi": "kandang",
+    "jumlah": 1
+  },
+  {
+    "timestamp": "2025-05-01T14:29:56.532Z",
+    "ternak": "kambing",
+    "aktivitas": "tidur",
+    "confidence": 0.84,
+    "lokasi": "kandang",
+    "jumlah": 1
+  },
+  {
+    "timestamp": "2025-05-01T13:29:56.532Z",
+    "ternak": "kambing",
+    "aktivitas": "melompat",
+    "confidence": 0.9,
+    "lokasi": "kandang",
+    "jumlah": 1
+  },
+  {
+    "timestamp": "2025-05-01T12:29:56.532Z",
+    "ternak": "kambing",
+    "aktivitas": "tidur",
+    "confidence": 0.84,
+    "lokasi": "kandang",
+    "jumlah": 1
+  },
+  {
+    "timestamp": "2025-05-01T11:29:56.532Z",
+    "ternak": "kambing",
+    "aktivitas": "tidur",
+    "confidence": 0.91,
+    "lokasi": "kandang",
+    "jumlah": 2
+  },
+  {
+    "timestamp": "2025-05-01T10:29:56.532Z",
+    "ternak": "kambing",
+    "aktivitas": "makan",
+    "confidence": 0.97,
+    "lokasi": "kandang",
+    "jumlah": 1
+  }
+]

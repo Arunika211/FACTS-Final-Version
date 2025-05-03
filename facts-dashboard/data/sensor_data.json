@@ -1,0 +1,803 @@
+[
+  {
+    "suhu": 35,
+    "kelembapan": 52.7,
+    "kualitas_udara": 101.95,
+    "jarak_pakan": 13.6,
+    "ternak": "ayam",
+    "timestamp": "2025-04-27T23:41:16.906Z"
+  },
+  {
+    "suhu": 36.8,
+    "kelembapan": 69.4,
+    "kualitas_udara": 95.02,
+    "jarak_pakan": 8.2,
+    "ternak": "ayam",
+    "timestamp": "2025-04-27T23:41:29.846Z"
+  },
+  {
+    "suhu": 36.1,
+    "kelembapan": 54.4,
+    "kualitas_udara": 396.65,
+    "jarak_pakan": 9.9,
+    "ternak": "ayam",
+    "timestamp": "2025-04-27T23:41:42.807Z"
+  },
+  {
+    "suhu": 35.2,
+    "kelembapan": 57.2,
+    "kualitas_udara": 99.04,
+    "jarak_pakan": 9.2,
+    "ternak": "ayam",
+    "timestamp": "2025-04-27T23:41:55.681Z"
+  },
+  {
+    "suhu": 36.9,
+    "kelembapan": 68.8,
+    "kualitas_udara": 75.07,
+    "jarak_pakan": 14,
+    "ternak": "ayam",
+    "timestamp": "2025-04-27T23:42:08.640Z"
+  },
+  {
+    "suhu": 36.3,
+    "kelembapan": 58.4,
+    "kualitas_udara": 389.21,
+    "jarak_pakan": 6.7,
+    "ternak": "ayam",
+    "timestamp": "2025-04-27T23:42:21.594Z"
+  },
+  {
+    "suhu": 34.8,
+    "kelembapan": 68.4,
+    "kualitas_udara": 147.26,
+    "jarak_pakan": 7.7,
+    "ternak": "ayam",
+    "timestamp": "2025-04-27T23:42:34.521Z"
+  },
+  {
+    "suhu": 32.1,
+    "kelembapan": 63.8,
+    "kualitas_udara": 71.35,
+    "jarak_pakan": 13,
+    "ternak": "ayam",
+    "timestamp": "2025-04-27T23:42:47.416Z"
+  },
+  {
+    "suhu": 33.3,
+    "kelembapan": 65.2,
+    "kualitas_udara": 184.37,
+    "jarak_pakan": 10.4,
+    "ternak": "ayam",
+    "timestamp": "2025-04-27T23:43:00.523Z"
+  },
+  {
+    "suhu": 32.4,
+    "kelembapan": 58.1,
+    "kualitas_udara": 154.05,
+    "jarak_pakan": 7.2,
+    "ternak": "ayam",
+    "timestamp": "2025-04-27T23:43:13.504Z"
+  },
+  {
+    "suhu": 35.2,
+    "kelembapan": 64.9,
+    "kualitas_udara": 88.57,
+    "jarak_pakan": 6.7,
+    "ternak": "ayam",
+    "timestamp": "2025-04-27T23:43:26.457Z"
+  },
+  {
+    "suhu": 35.2,
+    "kelembapan": 51.1,
+    "kualitas_udara": 138.24,
+    "jarak_pakan": 6.8,
+    "ternak": "ayam",
+    "timestamp": "2025-04-27T23:43:39.392Z"
+  },
+  {
+    "suhu": 32.5,
+    "kelembapan": 55.1,
+    "kualitas_udara": 162.9,
+    "jarak_pakan": 16.9,
+    "ternak": "ayam",
+    "timestamp": "2025-04-27T23:43:52.306Z"
+  },
+  {
+    "suhu": 33.7,
+    "kelembapan": 50.8,
+    "kualitas_udara": 51.02,
+    "jarak_pakan": 8.2,
+    "ternak": "ayam",
+    "timestamp": "2025-04-27T23:44:05.211Z"
+  },
+  {
+    "suhu": 34.7,
+    "kelembapan": 58.4,
+    "kualitas_udara": 197.87,
+    "jarak_pakan": 15.9,
+    "ternak": "ayam",
+    "timestamp": "2025-04-27T23:44:18.154Z"
+  },
+  {
+    "suhu": 35.2,
+    "kelembapan": 56.8,
+    "kualitas_udara": 307.23,
+    "jarak_pakan": 10.5,
+    "ternak": "ayam",
+    "timestamp": "2025-04-27T23:44:31.133Z"
+  },
+  {
+    "suhu": 34.6,
+    "kelembapan": 51,
+    "kualitas_udara": 135.49,
+    "jarak_pakan": 5.9,
+    "ternak": "ayam",
+    "timestamp": "2025-04-27T23:44:44.038Z"
+  },
+  {
+    "suhu": 35.9,
+    "kelembapan": 50.8,
+    "kualitas_udara": 227.34,
+    "jarak_pakan": 14.5,
+    "ternak": "ayam",
+    "timestamp": "2025-04-27T23:44:56.952Z"
+  },
+  {
+    "suhu": 32.7,
+    "kelembapan": 67.7,
+    "kualitas_udara": 55.83,
+    "jarak_pakan": 6.8,
+    "ternak": "ayam",
+    "timestamp": "2025-04-27T23:45:09.906Z"
+  },
+  {
+    "suhu": 34.1,
+    "kelembapan": 57.6,
+    "kualitas_udara": 369.65,
+    "jarak_pakan": 6.6,
+    "ternak": "ayam",
+    "timestamp": "2025-04-27T23:45:22.871Z"
+  },
+  {
+    "suhu": 32.2,
+    "kelembapan": 56.3,
+    "kualitas_udara": 204.64,
+    "jarak_pakan": 15.4,
+    "ternak": "ayam",
+    "timestamp": "2025-04-27T23:45:35.793Z"
+  },
+  {
+    "suhu": 35,
+    "kelembapan": 61.9,
+    "kualitas_udara": 364.25,
+    "jarak_pakan": 11.2,
+    "ternak": "ayam",
+    "timestamp": "2025-04-27T23:45:48.750Z"
+  },
+  {
+    "suhu": 36.7,
+    "kelembapan": 62,
+    "kualitas_udara": 204.04,
+    "jarak_pakan": 8.8,
+    "ternak": "ayam",
+    "timestamp": "2025-04-27T23:46:01.783Z"
+  },
+  {
+    "suhu": 33.4,
+    "kelembapan": 68.8,
+    "kualitas_udara": 101.54,
+    "jarak_pakan": 8.9,
+    "ternak": "ayam",
+    "timestamp": "2025-04-27T23:46:14.748Z"
+  },
+  {
+    "suhu": 34.7,
+    "kelembapan": 62.4,
+    "kualitas_udara": 184.06,
+    "jarak_pakan": 15.2,
+    "ternak": "ayam",
+    "timestamp": "2025-04-27T23:46:27.660Z"
+  },
+  {
+    "suhu": 36.4,
+    "kelembapan": 61.1,
+    "kualitas_udara": 357.52,
+    "jarak_pakan": 4.1,
+    "ternak": "ayam",
+    "timestamp": "2025-04-27T23:46:40.580Z"
+  },
+  {
+    "suhu": 34.3,
+    "kelembapan": 63.1,
+    "kualitas_udara": 241.24,
+    "jarak_pakan": 14.8,
+    "ternak": "ayam",
+    "timestamp": "2025-04-27T23:46:53.536Z"
+  },
+  {
+    "suhu": 33.9,
+    "kelembapan": 66.1,
+    "kualitas_udara": 386.7,
+    "jarak_pakan": 14.2,
+    "ternak": "ayam",
+    "timestamp": "2025-04-27T23:47:06.455Z"
+  },
+  {
+    "suhu": 34.6,
+    "kelembapan": 63.3,
+    "kualitas_udara": 329.21,
+    "jarak_pakan": 9.6,
+    "ternak": "ayam",
+    "timestamp": "2025-04-27T23:47:19.506Z"
+  },
+  {
+    "suhu": 35.2,
+    "kelembapan": 62.8,
+    "kualitas_udara": 185.94,
+    "jarak_pakan": 11.8,
+    "ternak": "ayam",
+    "timestamp": "2025-04-27T23:47:32.516Z"
+  },
+  {
+    "suhu": 33.1,
+    "kelembapan": 63.7,
+    "kualitas_udara": 148.38,
+    "jarak_pakan": 8.7,
+    "ternak": "ayam",
+    "timestamp": "2025-04-27T23:47:45.463Z"
+  },
+  {
+    "suhu": 33.6,
+    "kelembapan": 56.7,
+    "kualitas_udara": 81.3,
+    "jarak_pakan": 15.7,
+    "ternak": "ayam",
+    "timestamp": "2025-04-27T23:47:58.421Z"
+  },
+  {
+    "suhu": 36.9,
+    "kelembapan": 51.2,
+    "kualitas_udara": 329.85,
+    "jarak_pakan": 8.8,
+    "ternak": "ayam",
+    "timestamp": "2025-04-27T23:48:11.547Z"
+  },
+  {
+    "suhu": 33.4,
+    "kelembapan": 65.5,
+    "kualitas_udara": 193.96,
+    "jarak_pakan": 6.5,
+    "ternak": "ayam",
+    "timestamp": "2025-04-27T23:48:24.511Z"
+  },
+  {
+    "suhu": 32,
+    "kelembapan": 62,
+    "kualitas_udara": 78.61,
+    "jarak_pakan": 14.6,
+    "ternak": "ayam",
+    "timestamp": "2025-04-27T23:48:37.494Z"
+  },
+  {
+    "suhu": 32.9,
+    "kelembapan": 50.2,
+    "kualitas_udara": 360.88,
+    "jarak_pakan": 16.2,
+    "ternak": "ayam",
+    "timestamp": "2025-04-27T23:48:50.382Z"
+  },
+  {
+    "suhu": 36.6,
+    "kelembapan": 60.3,
+    "kualitas_udara": 178.13,
+    "jarak_pakan": 19.9,
+    "ternak": "ayam",
+    "timestamp": "2025-04-27T23:49:03.260Z"
+  },
+  {
+    "suhu": 36,
+    "kelembapan": 57.9,
+    "kualitas_udara": 116.38,
+    "jarak_pakan": 16.4,
+    "ternak": "ayam",
+    "timestamp": "2025-04-28T06:56:14.442Z"
+  },
+  {
+    "suhu": 36.6,
+    "kelembapan": 63.9,
+    "kualitas_udara": 260.7,
+    "jarak_pakan": 6.4,
+    "ternak": "ayam",
+    "timestamp": "2025-04-28T06:56:26.499Z"
+  },
+  {
+    "suhu": 32.3,
+    "kelembapan": 69.4,
+    "kualitas_udara": 365.22,
+    "jarak_pakan": 2.3,
+    "ternak": "ayam",
+    "timestamp": "2025-04-28T06:56:42.142Z"
+  },
+  {
+    "suhu": 33.8,
+    "kelembapan": 65.3,
+    "kualitas_udara": 78.63,
+    "jarak_pakan": 9.1,
+    "ternak": "ayam",
+    "timestamp": "2025-04-28T06:56:55.184Z"
+  },
+  {
+    "suhu": 35.2,
+    "kelembapan": 65.7,
+    "kualitas_udara": 66.05,
+    "jarak_pakan": 13.5,
+    "ternak": "ayam",
+    "timestamp": "2025-04-28T06:57:09.572Z"
+  },
+  {
+    "suhu": 35.5,
+    "kelembapan": 67.4,
+    "kualitas_udara": 183.97,
+    "jarak_pakan": 17.5,
+    "ternak": "ayam",
+    "timestamp": "2025-04-28T06:57:23.131Z"
+  },
+  {
+    "suhu": 35.5,
+    "kelembapan": 62.7,
+    "kualitas_udara": 137.46,
+    "jarak_pakan": 12,
+    "ternak": "ayam",
+    "timestamp": "2025-04-28T06:57:49.316Z"
+  },
+  {
+    "suhu": 33.6,
+    "kelembapan": 64.7,
+    "kualitas_udara": 390.69,
+    "jarak_pakan": 13.2,
+    "ternak": "ayam",
+    "timestamp": "2025-04-28T06:58:02.475Z"
+  },
+  {
+    "suhu": 32.5,
+    "kelembapan": 68,
+    "kualitas_udara": 85.7,
+    "jarak_pakan": 9.3,
+    "ternak": "ayam",
+    "timestamp": "2025-04-28T06:58:15.422Z"
+  },
+  {
+    "suhu": 36.4,
+    "kelembapan": 61.7,
+    "kualitas_udara": 65.17,
+    "jarak_pakan": 6,
+    "ternak": "ayam",
+    "timestamp": "2025-04-28T06:58:41.964Z"
+  },
+  {
+    "suhu": 36.2,
+    "kelembapan": 55,
+    "kualitas_udara": 300.96,
+    "jarak_pakan": 16,
+    "ternak": "ayam",
+    "timestamp": "2025-04-28T06:58:54.879Z"
+  },
+  {
+    "suhu": 33.4,
+    "kelembapan": 53.5,
+    "kualitas_udara": 377.42,
+    "jarak_pakan": 13.9,
+    "ternak": "ayam",
+    "timestamp": "2025-04-28T06:59:09.801Z"
+  },
+  {
+    "suhu": 36.9,
+    "kelembapan": 64.9,
+    "kualitas_udara": 204.82,
+    "jarak_pakan": 19.6,
+    "ternak": "ayam",
+    "timestamp": "2025-04-28T06:59:25.083Z"
+  },
+  {
+    "suhu": 35.8,
+    "kelembapan": 59.3,
+    "kualitas_udara": 390.27,
+    "jarak_pakan": 18.5,
+    "ternak": "ayam",
+    "timestamp": "2025-04-28T06:59:38.046Z"
+  },
+  {
+    "suhu": 34.8,
+    "kelembapan": 66,
+    "kualitas_udara": 227.41,
+    "jarak_pakan": 10.3,
+    "ternak": "ayam",
+    "timestamp": "2025-04-28T06:59:51.904Z"
+  },
+  {
+    "suhu": 36.6,
+    "kelembapan": 62.8,
+    "kualitas_udara": 310.45,
+    "jarak_pakan": 13.8,
+    "ternak": "ayam",
+    "timestamp": "2025-04-28T07:00:06.361Z"
+  },
+  {
+    "suhu": 34.1,
+    "kelembapan": 63.9,
+    "kualitas_udara": 223.55,
+    "jarak_pakan": 6,
+    "ternak": "ayam",
+    "timestamp": "2025-04-28T07:00:32.166Z"
+  },
+  {
+    "suhu": 33,
+    "kelembapan": 63.9,
+    "kualitas_udara": 176.15,
+    "jarak_pakan": 9.6,
+    "ternak": "ayam",
+    "timestamp": "2025-04-28T07:00:56.930Z"
+  },
+  {
+    "suhu": 34.2,
+    "kelembapan": 51.7,
+    "kualitas_udara": 305.94,
+    "jarak_pakan": 14.6,
+    "ternak": "ayam",
+    "timestamp": "2025-04-28T07:01:09.751Z"
+  },
+  {
+    "suhu": 35.3,
+    "kelembapan": 66.8,
+    "kualitas_udara": 69.96,
+    "jarak_pakan": 2.9,
+    "ternak": "ayam",
+    "timestamp": "2025-04-28T07:01:40.744Z"
+  },
+  {
+    "suhu": 36.7,
+    "kelembapan": 54.7,
+    "kualitas_udara": 96.86,
+    "jarak_pakan": 11.1,
+    "ternak": "ayam",
+    "timestamp": "2025-04-28T07:02:01.145Z"
+  },
+  {
+    "suhu": 34.2,
+    "kelembapan": 61.5,
+    "kualitas_udara": 156.64,
+    "jarak_pakan": 8.9,
+    "ternak": "ayam",
+    "timestamp": "2025-04-28T07:02:23.066Z"
+  },
+  {
+    "suhu": 35.7,
+    "kelembapan": 65.5,
+    "kualitas_udara": 293.25,
+    "jarak_pakan": 12.7,
+    "ternak": "ayam",
+    "timestamp": "2025-04-28T07:02:54.064Z"
+  },
+  {
+    "suhu": 32.6,
+    "kelembapan": 51.3,
+    "kualitas_udara": 251.12,
+    "jarak_pakan": 7.8,
+    "ternak": "ayam",
+    "timestamp": "2025-04-28T07:03:08.429Z"
+  },
+  {
+    "suhu": 33,
+    "kelembapan": 61.1,
+    "kualitas_udara": 139.25,
+    "jarak_pakan": 10.5,
+    "ternak": "ayam",
+    "timestamp": "2025-04-28T07:03:40.093Z"
+  },
+  {
+    "suhu": 34.9,
+    "kelembapan": 57.8,
+    "kualitas_udara": 153.13,
+    "jarak_pakan": 17.8,
+    "ternak": "ayam",
+    "timestamp": "2025-04-28T07:03:55.418Z"
+  },
+  {
+    "suhu": 34.7,
+    "kelembapan": 51.3,
+    "kualitas_udara": 118.22,
+    "jarak_pakan": 15.4,
+    "ternak": "ayam",
+    "timestamp": "2025-04-28T07:04:47.994Z"
+  },
+  {
+    "suhu": 35.1,
+    "kelembapan": 68.8,
+    "kualitas_udara": 228.11,
+    "jarak_pakan": 7.4,
+    "ternak": "ayam",
+    "timestamp": "2025-04-28T07:06:02.081Z"
+  },
+  {
+    "suhu": 32.1,
+    "kelembapan": 51.6,
+    "kualitas_udara": 299.58,
+    "jarak_pakan": 10.9,
+    "ternak": "ayam",
+    "timestamp": "2025-04-28T07:06:21.291Z"
+  },
+  {
+    "suhu": 33.1,
+    "kelembapan": 52.8,
+    "kualitas_udara": 176.37,
+    "jarak_pakan": 14.7,
+    "ternak": "ayam",
+    "timestamp": "2025-04-28T07:06:50.890Z"
+  },
+  {
+    "suhu": 34.5,
+    "kelembapan": 67.1,
+    "kualitas_udara": 190.7,
+    "jarak_pakan": 4.2,
+    "ternak": "ayam",
+    "timestamp": "2025-04-28T07:07:35.540Z"
+  },
+  {
+    "suhu": 33.7,
+    "kelembapan": 65,
+    "kualitas_udara": 289.8,
+    "jarak_pakan": 15.2,
+    "ternak": "ayam",
+    "timestamp": "2025-04-28T07:09:30.898Z"
+  },
+  {
+    "suhu": 34.7,
+    "kelembapan": 52.5,
+    "kualitas_udara": 214.17,
+    "jarak_pakan": 13.1,
+    "ternak": "ayam",
+    "timestamp": "2025-04-28T07:10:30.566Z"
+  },
+  {
+    "suhu": 33.1,
+    "kelembapan": 64,
+    "kualitas_udara": 286.43,
+    "jarak_pakan": 4.1,
+    "ternak": "ayam",
+    "timestamp": "2025-04-28T07:10:43.756Z"
+  },
+  {
+    "suhu": 36.4,
+    "kelembapan": 60.4,
+    "kualitas_udara": 250.78,
+    "jarak_pakan": 19.3,
+    "ternak": "ayam",
+    "timestamp": "2025-04-28T07:10:56.831Z"
+  },
+  {
+    "suhu": 34.2,
+    "kelembapan": 67.9,
+    "kualitas_udara": 356.97,
+    "jarak_pakan": 10,
+    "ternak": "ayam",
+    "timestamp": "2025-04-28T07:11:20.792Z"
+  },
+  {
+    "suhu": 32.9,
+    "kelembapan": 67.3,
+    "kualitas_udara": 102.26,
+    "jarak_pakan": 9.5,
+    "ternak": "ayam",
+    "timestamp": "2025-04-28T07:12:30.428Z"
+  },
+  {
+    "suhu": 36,
+    "kelembapan": 66.2,
+    "kualitas_udara": 234.23,
+    "jarak_pakan": 14.5,
+    "ternak": "ayam",
+    "timestamp": "2025-04-28T07:13:17.546Z"
+  },
+  {
+    "suhu": 36.7,
+    "kelembapan": 69.7,
+    "kualitas_udara": 63.49,
+    "jarak_pakan": 3,
+    "ternak": "ayam",
+    "timestamp": "2025-04-28T07:13:34.384Z"
+  },
+  {
+    "suhu": 37,
+    "kelembapan": 51.4,
+    "kualitas_udara": 310.63,
+    "jarak_pakan": 12.9,
+    "ternak": "ayam",
+    "timestamp": "2025-04-28T07:13:47.639Z"
+  },
+  {
+    "suhu": 34.3,
+    "kelembapan": 68.4,
+    "kualitas_udara": 272.88,
+    "jarak_pakan": 15.9,
+    "ternak": "ayam",
+    "timestamp": "2025-04-28T07:14:05.652Z"
+  },
+  {
+    "suhu": 32.6,
+    "kelembapan": 67.6,
+    "kualitas_udara": 326.09,
+    "jarak_pakan": 17.2,
+    "ternak": "ayam",
+    "timestamp": "2025-04-28T07:14:18.520Z"
+  },
+  {
+    "suhu": 35.5,
+    "kelembapan": 55.2,
+    "kualitas_udara": 279.87,
+    "jarak_pakan": 19.9,
+    "ternak": "ayam",
+    "timestamp": "2025-04-28T07:14:31.487Z"
+  },
+  {
+    "suhu": 33.5,
+    "kelembapan": 51.4,
+    "kualitas_udara": 153.76,
+    "jarak_pakan": 18.8,
+    "ternak": "ayam",
+    "timestamp": "2025-04-28T07:14:44.381Z"
+  },
+  {
+    "suhu": 36.7,
+    "kelembapan": 55.2,
+    "kualitas_udara": 224.36,
+    "jarak_pakan": 18.5,
+    "ternak": "ayam",
+    "timestamp": "2025-04-28T07:14:57.227Z"
+  },
+  {
+    "suhu": 35.1,
+    "kelembapan": 50.6,
+    "kualitas_udara": 344.13,
+    "jarak_pakan": 12.4,
+    "ternak": "ayam",
+    "timestamp": "2025-04-28T07:15:13.533Z"
+  },
+  {
+    "suhu": 34.3,
+    "kelembapan": 62.6,
+    "kualitas_udara": 264.89,
+    "jarak_pakan": 14.3,
+    "ternak": "ayam",
+    "timestamp": "2025-04-28T07:15:27.882Z"
+  },
+  {
+    "suhu": 35.3,
+    "kelembapan": 69.5,
+    "kualitas_udara": 322.33,
+    "jarak_pakan": 3.2,
+    "ternak": "ayam",
+    "timestamp": "2025-04-28T07:15:40.907Z"
+  },
+  {
+    "suhu": 36.3,
+    "kelembapan": 67.3,
+    "kualitas_udara": 80.83,
+    "jarak_pakan": 18.7,
+    "ternak": "ayam",
+    "timestamp": "2025-04-28T07:15:55.963Z"
+  },
+  {
+    "suhu": 36,
+    "kelembapan": 64.9,
+    "kualitas_udara": 111.5,
+    "jarak_pakan": 4.3,
+    "ternak": "ayam",
+    "timestamp": "2025-04-28T07:16:12.966Z"
+  },
+  {
+    "suhu": 33,
+    "kelembapan": 50.7,
+    "kualitas_udara": 333.79,
+    "jarak_pakan": 5.3,
+    "ternak": "ayam",
+    "timestamp": "2025-04-28T07:16:26.998Z"
+  },
+  {
+    "suhu": 32.3,
+    "kelembapan": 54.8,
+    "kualitas_udara": 111.22,
+    "jarak_pakan": 10.6,
+    "ternak": "ayam",
+    "timestamp": "2025-04-28T07:16:40.956Z"
+  },
+  {
+    "suhu": 33.4,
+    "kelembapan": 69.4,
+    "kualitas_udara": 121.94,
+    "jarak_pakan": 13.3,
+    "ternak": "ayam",
+    "timestamp": "2025-04-28T07:16:56.693Z"
+  },
+  {
+    "suhu": 34.8,
+    "kelembapan": 51.9,
+    "kualitas_udara": 56.63,
+    "jarak_pakan": 19.7,
+    "ternak": "ayam",
+    "timestamp": "2025-04-28T07:17:09.987Z"
+  },
+  {
+    "suhu": 25.7,
+    "kelembapan": 76.1,
+    "kualitas_udara": 62.52,
+    "jarak_pakan": 11.7,
+    "ternak": "sapi",
+    "timestamp": "2025-04-28T15:53:41.392Z"
+  },
+  {
+    "suhu": 28.5,
+    "kelembapan": 75.8,
+    "kualitas_udara": 366.13,
+    "jarak_pakan": 14.3,
+    "ternak": "sapi",
+    "timestamp": "2025-04-28T15:53:57.538Z"
+  },
+  {
+    "suhu": 27.5,
+    "kelembapan": 60.9,
+    "kualitas_udara": 56.68,
+    "jarak_pakan": 4.2,
+    "ternak": "sapi",
+    "timestamp": "2025-04-28T15:58:41.815Z"
+  },
+  {
+    "suhu": 25.8,
+    "kelembapan": 63.6,
+    "kualitas_udara": 78.11,
+    "jarak_pakan": 17.5,
+    "ternak": "sapi",
+    "timestamp": "2025-04-28T15:58:48.180Z"
+  },
+  {
+    "suhu": 26.4,
+    "kelembapan": 61.8,
+    "kualitas_udara": 83.13,
+    "jarak_pakan": 15,
+    "ternak": "sapi",
+    "timestamp": "2025-04-28T15:58:54.884Z"
+  },
+  {
+    "suhu": 26.6,
+    "kelembapan": 69.4,
+    "kualitas_udara": 234.85,
+    "jarak_pakan": 12,
+    "ternak": "sapi",
+    "timestamp": "2025-04-28T15:59:02.241Z"
+  },
+  {
+    "suhu": 31.6,
+    "kelembapan": 68.9,
+    "kualitas_udara": 145.64,
+    "jarak_pakan": 11.9,
+    "ternak": "sapi",
+    "timestamp": "2025-04-28T15:59:08.904Z"
+  },
+  {
+    "suhu": 28.4,
+    "kelembapan": 62.9,
+    "kualitas_udara": 194.93,
+    "jarak_pakan": 19.2,
+    "ternak": "sapi",
+    "timestamp": "2025-04-28T15:59:15.356Z"
+  },
+  {
+    "timestamp": "2025-04-27T23:59:19.906Z",
+    "suhu": 30,
+    "kelembaban": 66.6,
+    "kualitas_udara": 333.54,
+    "jarak_pakan": 5.6,
+    "aktivitas": 2,
+    "ternak": "sapi"
+  }
+]
