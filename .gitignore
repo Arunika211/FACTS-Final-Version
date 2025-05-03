@@ -9,6 +9,7 @@ __pycache__/
 .Python
 .env
 .venv
+.env.local
 
 # Ignore build and distribution files
 dist/
