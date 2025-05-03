@@ -276,7 +276,7 @@ const MonitoringTab: React.FC<MonitoringTabProps> = ({
                   </span>
                   <span 
                     className="px-1 sm:px-1.5 md:px-2 py-0.5 text-[8px] sm:text-[9px] md:text-[10px] rounded-full font-medium flex items-center gap-0.5" 
-                    style={{
+                    style={{ 
                       backgroundColor: latestData.suhu ? 
                         (getTemperatureStatus(latestData.suhu) === 'normal' ? 'rgba(16, 185, 129, 0.1)' : 
                          getTemperatureStatus(latestData.suhu) === 'warning' ? 'rgba(245, 158, 11, 0.1)' : 'rgba(239, 68, 68, 0.1)') : 
@@ -319,7 +319,7 @@ const MonitoringTab: React.FC<MonitoringTabProps> = ({
                   </span>
                   <span 
                     className="px-1 sm:px-1.5 md:px-2 py-0.5 text-[8px] sm:text-[9px] md:text-[10px] rounded-full font-medium flex items-center gap-0.5" 
-                    style={{
+                    style={{ 
                       backgroundColor: (latestData.kelembapan || latestData.kelembaban) ? 
                         (getHumidityStatus(latestData.kelembapan || latestData.kelembaban) === 'normal' ? 'rgba(16, 185, 129, 0.1)' : 
                          getHumidityStatus(latestData.kelembapan || latestData.kelembaban) === 'warning' ? 'rgba(245, 158, 11, 0.1)' : 'rgba(239, 68, 68, 0.1)') : 
@@ -362,7 +362,7 @@ const MonitoringTab: React.FC<MonitoringTabProps> = ({
                   </span>
                   <span 
                     className="px-1 sm:px-1.5 md:px-2 py-0.5 text-[8px] sm:text-[9px] md:text-[10px] rounded-full font-medium flex items-center gap-0.5" 
-                    style={{
+                    style={{ 
                       backgroundColor: latestData.kualitas_udara ? 
                         (getAirQualityStatus(latestData.kualitas_udara) === 'normal' ? 'rgba(16, 185, 129, 0.1)' : 
                          getAirQualityStatus(latestData.kualitas_udara) === 'warning' ? 'rgba(245, 158, 11, 0.1)' : 'rgba(239, 68, 68, 0.1)') : 
@@ -405,7 +405,7 @@ const MonitoringTab: React.FC<MonitoringTabProps> = ({
                   </span>
                   <span 
                     className="px-1 sm:px-1.5 md:px-2 py-0.5 text-[8px] sm:text-[9px] md:text-[10px] rounded-full font-medium flex items-center gap-0.5" 
-                    style={{
+                    style={{ 
                       backgroundColor: latestData.aktivitas !== undefined ? 
                         (getActivityStatus(latestData.aktivitas) === 'normal' ? 'rgba(16, 185, 129, 0.1)' : 
                          getActivityStatus(latestData.aktivitas) === 'warning' ? 'rgba(245, 158, 11, 0.1)' : 'rgba(239, 68, 68, 0.1)') : 

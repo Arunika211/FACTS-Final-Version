@@ -10,3 +10,4 @@ PyYAML>=5.4.1
 tqdm>=4.62.2
 pymongo>=4.0.0
 configparser>=5.0.0 
+gunicorns

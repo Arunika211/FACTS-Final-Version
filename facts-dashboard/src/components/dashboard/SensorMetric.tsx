@@ -189,8 +189,8 @@ const SensorMetric: React.FC<SensorMetricProps> = ({
             style={{
               background: 'linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.3) 50%, transparent 100%)',
               animation: isVerySmallScreen ? 'none' : 'barHighlight 2s infinite linear'
-            }}
-          ></div>
+          }}
+        ></div>
         </div>
       </div>
       
