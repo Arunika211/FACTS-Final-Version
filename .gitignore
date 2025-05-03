@@ -33,24 +33,3 @@ yarn-error.log*
 *.swo
 .DS_Store
 
-# Don't ignore facts-dashboard build files needed for deployment
-# (facts-dashboard has its own .gitignore for development)
-!facts-dashboard/build/
-!facts-dashboard/out/
-!facts-dashboard/.next/
-
-# Ignore large model files (add back manually)
-# /models/*.pt
-# But keep the directory
-!/models/
-!/models/.gitkeep
-
-# Ignore test data but keep structure
-# /data/*.json
-# But keep the directory
-!/data/
-!/data/.gitkeep
-
-/*
-!facts-dashboard/
-!.gitignore 

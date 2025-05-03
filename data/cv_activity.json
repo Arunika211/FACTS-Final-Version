@@ -1,0 +1,202 @@
+[
+  {
+    "ternak": "sapi",
+    "aktivitas": "berdiri",
+    "confidence": 0.9480955832413165,
+    "lokasi": "kandang",
+    "jumlah": 3,
+    "timestamp": "2025-05-02T00:27:34.554Z"
+  },
+  {
+    "ternak": "sapi",
+    "aktivitas": "makan",
+    "confidence": 0.8698438255968485,
+    "lokasi": "kandang",
+    "jumlah": 1,
+    "timestamp": "2025-05-02T00:27:36.558Z"
+  },
+  {
+    "ternak": "sapi",
+    "aktivitas": "berjalan",
+    "confidence": 0.8400166234150264,
+    "lokasi": "kandang",
+    "jumlah": 1,
+    "timestamp": "2025-05-02T00:27:38.550Z"
+  },
+  {
+    "ternak": "ayam",
+    "aktivitas": "terbang",
+    "confidence": 0.8434814273976685,
+    "lokasi": "kandang",
+    "jumlah": 2,
+    "timestamp": "2025-05-02T00:27:48.567Z"
+  },
+  {
+    "ternak": "ayam",
+    "aktivitas": "terbang",
+    "confidence": 0.6139876435673886,
+    "lokasi": "kandang",
+    "jumlah": 3,
+    "timestamp": "2025-05-02T00:27:50.565Z"
+  },
+  {
+    "ternak": "ayam",
+    "aktivitas": "terbang",
+    "confidence": 0.8630837650414113,
+    "lokasi": "kandang",
+    "jumlah": 3,
+    "timestamp": "2025-05-02T00:27:52.567Z"
+  },
+  {
+    "ternak": "ayam",
+    "aktivitas": "makan",
+    "confidence": 0.6561443792615125,
+    "lokasi": "kandang",
+    "jumlah": 3,
+    "timestamp": "2025-05-02T00:27:54.569Z"
+  },
+  {
+    "ternak": "ayam",
+    "aktivitas": "tidur",
+    "confidence": 0.8598362184822819,
+    "lokasi": "kandang",
+    "jumlah": 3,
+    "timestamp": "2025-05-02T00:27:56.568Z"
+  },
+  {
+    "ternak": "ayam",
+    "aktivitas": "tidur",
+    "confidence": 0.5004362531954454,
+    "lokasi": "kandang",
+    "jumlah": 1,
+    "timestamp": "2025-05-02T00:27:58.566Z"
+  },
+  {
+    "ternak": "ayam",
+    "aktivitas": "makan",
+    "confidence": 0.634589285943813,
+    "lokasi": "kandang",
+    "jumlah": 3,
+    "timestamp": "2025-05-02T00:28:00.567Z"
+  },
+  {
+    "ternak": "ayam",
+    "aktivitas": "bertelur",
+    "confidence": 0.6585904861540544,
+    "lokasi": "kandang",
+    "jumlah": 2,
+    "timestamp": "2025-05-02T00:28:02.566Z"
+  },
+  {
+    "ternak": "ayam",
+    "aktivitas": "bertelur",
+    "confidence": 0.7220146349512757,
+    "lokasi": "kandang",
+    "jumlah": 2,
+    "timestamp": "2025-05-02T00:28:04.568Z"
+  },
+  {
+    "ternak": "ayam",
+    "aktivitas": "bertelur",
+    "confidence": 0.8090680276840119,
+    "lokasi": "kandang",
+    "jumlah": 2,
+    "timestamp": "2025-05-02T00:28:06.571Z"
+  },
+  {
+    "ternak": "ayam",
+    "aktivitas": "makan",
+    "confidence": 0.516479579135225,
+    "lokasi": "kandang",
+    "jumlah": 2,
+    "timestamp": "2025-05-02T00:28:08.574Z"
+  },
+  {
+    "ternak": "ayam",
+    "aktivitas": "makan",
+    "confidence": 0.6787082708454139,
+    "lokasi": "kandang",
+    "jumlah": 2,
+    "timestamp": "2025-05-02T00:28:10.563Z"
+  },
+  {
+    "ternak": "ayam",
+    "aktivitas": "tidur",
+    "confidence": 0.8937164093395277,
+    "lokasi": "kandang",
+    "jumlah": 2,
+    "timestamp": "2025-05-02T00:28:12.564Z"
+  },
+  {
+    "ternak": "ayam",
+    "aktivitas": "bertelur",
+    "confidence": 0.7098267599722544,
+    "lokasi": "kandang",
+    "jumlah": 1,
+    "timestamp": "2025-05-02T00:28:14.566Z"
+  },
+  {
+    "ternak": "ayam",
+    "aktivitas": "makan",
+    "confidence": 0.5118357857581217,
+    "lokasi": "kandang",
+    "jumlah": 1,
+    "timestamp": "2025-05-02T00:28:16.569Z"
+  },
+  {
+    "ternak": "ayam",
+    "aktivitas": "terbang",
+    "confidence": 0.6180978275475507,
+    "lokasi": "kandang",
+    "jumlah": 2,
+    "timestamp": "2025-05-02T00:28:18.568Z"
+  },
+  {
+    "ternak": "ayam",
+    "aktivitas": "makan",
+    "confidence": 0.5036238832699119,
+    "lokasi": "kandang",
+    "jumlah": 3,
+    "timestamp": "2025-05-02T00:28:20.564Z"
+  },
+  {
+    "ternak": "ayam",
+    "confidence": 0.85,
+    "lokasi": "kandang",
+    "timestamp": "2025-05-02T00:40:35.651Z"
+  },
+  {
+    "ternak": "ayam",
+    "confidence": 0.85,
+    "lokasi": "kandang",
+    "timestamp": "2025-05-02T00:40:41.399Z"
+  },
+  {
+    "ternak": "ayam",
+    "confidence": 0.85,
+    "lokasi": "kandang",
+    "timestamp": "2025-05-02T00:40:50.803Z"
+  },
+  {
+    "ternak": "ayam",
+    "confidence": 0.85,
+    "lokasi": "kandang",
+    "timestamp": "2025-05-02T00:40:51.097Z"
+  },
+  {
+    "ternak": "ayam",
+    "aktivitas": "tidur",
+    "confidence": 0.9827605223202889,
+    "lokasi": "kandang",
+    "jumlah": 3,
+    "timestamp": "2025-05-02T00:42:04.649Z"
+  },
+  {
+    "ternak": "ayam",
+    "aktivitas": "makan",
+    "confidence": 0.9319299586904156,
+    "lokasi": "kandang",
+    "jumlah": 2,
+    "timestamp": "2025-05-02T00:42:06.651Z"
+  }
+]
