@@ -2,6 +2,13 @@
 const nextConfig = {
   reactStrictMode: true,
   // swcMinify dinonaktifkan karena tidak kompatibel dengan Next.js 15.3.1
+  
+  // Konfigurasi untuk Image
+  images: {
+    domains: [],
+    unoptimized: true, // Untuk static export
+  },
+  
   async rewrites() {
     return [
       {

@@ -103,6 +103,19 @@ Jika mendapatkan error build karena masalah TypeScript linting, ada beberapa sol
    - Perbaiki semua error TypeScript dalam kode sumber
    - Perbarui `tsconfig.json` untuk mengatur opsi kompiler TypeScript
 
+### Masalah Komponen Next.js Image
+Jika mendapatkan error tipe dengan komponen Image, pastikan:
+1. Komponen Image diimpor dengan benar: `import Image from 'next/image'`
+2. File gambar yang direferensikan benar-benar ada di direktori `/public`
+3. Tambahkan konfigurasi images di `next.config.js`:
+   ```js
+   images: {
+     domains: [],
+     unoptimized: true, // Untuk static export
+   },
+   ```
+4. Jika masih mengalami masalah, coba tambahkan properti `priority` ke komponen Image
+
 ### Melalui Netlify CLI
 
 1. Install Netlify CLI:
