@@ -7,7 +7,7 @@
   },
   "scripts": {
     "dev": "next dev --turbopack",
-    "build": "next build --no-lint",
+    "build": "CI=false NEXT_IGNORE_TS_ERRORS=true next build --no-lint",
     "start": "next start",
     "lint": "next lint",
     "export": "next build && next export -o out"

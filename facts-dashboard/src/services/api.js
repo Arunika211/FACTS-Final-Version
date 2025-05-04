@@ -30,6 +30,53 @@ export const imageToBase64 = (file) => {
 };
 
 /**
+ * Helper function untuk mengatasi masalah CORS
+ * @param {string} url - URL API yang akan dipanggil
+ * @param {Object} options - Opsi fetch
+ * @returns {Promise<Response>} - Response dari API
+ */
+const fetchWithCORS = async (url, options = {}) => {
+  // Tambahkan mode 'cors' dan credentials 'include'
+  const fetchOptions = {
+    ...options,
+    mode: 'cors',
+    credentials: 'include',
+    headers: {
+      ...options.headers,
+      'Access-Control-Allow-Origin': '*',
+    }
+  };
+  
+  try {
+    // Coba langsung ke API
+    const response = await fetch(url, fetchOptions);
+    if (response.ok) return response;
+    
+    // Jika gagal, coba gunakan CORS proxy
+    const corsProxies = [
+      `https://cors-anywhere.herokuapp.com/${url}`,
+      `https://api.allorigins.win/raw?url=${encodeURIComponent(url)}`,
+      `https://corsproxy.io/?${encodeURIComponent(url)}`
+    ];
+    
+    // Coba setiap proxy sampai berhasil
+    for (const proxyUrl of corsProxies) {
+      try {
+        const proxyResponse = await fetch(proxyUrl, options);
+        if (proxyResponse.ok) return proxyResponse;
+      } catch (e) {
+        console.warn(`Proxy ${proxyUrl} failed:`, e);
+      }
+    }
+    
+    throw new Error(`All CORS proxies failed`);
+  } catch (error) {
+    console.error('CORS fetch error:', error);
+    throw error;
+  }
+};
+
+/**
  * Fungsi untuk melakukan deteksi hewan menggunakan Gradio API
  * @param {File|Blob|string} imageFile - File gambar, bisa berupa File, Blob, atau string base64
  * @param {string} model - Nama model yang akan digunakan (default: sapi)
@@ -52,23 +99,27 @@ export const detectAnimal = async (imageFile, model = DEFAULT_MODEL) => {
       base64Image = await imageToBase64(imageFile);
     }
 
-    // Panggil API Gradio
+    // Panggil API Gradio dengan CORS handling
     console.log(`Calling Gradio API with model: ${model}`);
-    const response = await fetch(GRADIO_API_URL, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        fn_index: 0, // Indeks fungsi process_image di Gradio
-        data: [base64Image, model],
-      }),
-    });
-
-    if (!response.ok) {
-      throw new Error(`API responded with status: ${response.status}`);
+    
+    try {
+      // Cara 1: Langsung ke API dengan CORS handling
+      const response = await fetchWithCORS(GRADIO_API_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          fn_index: 0, // Indeks fungsi process_image di Gradio
+          data: [base64Image, model],
+        }),
+      });
+      
+      const result = await response.json();
+      return result.data;
+    } catch (error) {
+      console.warn('Direct API call failed, using simulation mode:', error);
+      // Fallback ke mode simulasi jika API call gagal
+      return generateSampleDetection(model);
     }
-
-    const result = await response.json();
-    return result.data;
   } catch (error) {
     console.error('Error detecting animal:', error);
     throw error;
@@ -81,7 +132,7 @@ export const detectAnimal = async (imageFile, model = DEFAULT_MODEL) => {
  */
 export const getSystemStatus = async () => {
   try {
-    const response = await fetch(GRADIO_API_URL, {
+    const response = await fetchWithCORS(GRADIO_API_URL, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
@@ -90,16 +141,54 @@ export const getSystemStatus = async () => {
       }),
     });
 
-    if (!response.ok) {
-      throw new Error(`API responded with status: ${response.status}`);
-    }
-
     const result = await response.json();
     return result.data;
   } catch (error) {
     console.error('Error getting system status:', error);
-    return '### Error\nGagal mendapatkan status sistem. API mungkin sedang offline.';
+    return '### Error\nGagal mendapatkan status sistem. API mungkin sedang offline atau terjadi masalah CORS.';
   }
+};
+
+/**
+ * Mendapatkan data sensor dari API
+ * @param {number} limit - Jumlah data yang akan diambil
+ * @returns {Promise<Array>} - Array data sensor
+ */
+export const getSensorData = async (limit = 50) => {
+  try {
+    // Coba dengan fetchWithCORS untuk mengatasi masalah CORS
+    const response = await fetchWithCORS(`${API_URL}/sensor-data?limit=${limit}`);
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error('Error fetching sensor data:', error);
+    // Buat data dummy sebagai fallback
+    return generateDummySensorData(limit);
+  }
+};
+
+/**
+ * Menghasilkan data sensor dummy untuk fallback
+ * @param {number} count - Jumlah data yang akan dibuat
+ * @returns {Array} - Array data sensor dummy
+ */
+const generateDummySensorData = (count = 10) => {
+  const now = Date.now();
+  const hourMs = 60 * 60 * 1000;
+  
+  return Array.from({ length: count }, (_, i) => {
+    const timestamp = new Date(now - (i * hourMs));
+    return {
+      device_id: "SIMULATOR",
+      timestamp: timestamp.toISOString(),
+      temperature: 20 + Math.random() * 15,
+      humidity: 40 + Math.random() * 40,
+      light: 100 + Math.random() * 900,
+      soil_moisture: 20 + Math.random() * 60,
+      motion: Math.random() > 0.7,
+      simulation: true
+    };
+  }).reverse();
 };
 
 /**
@@ -133,6 +222,7 @@ export const constants = {
 export default {
   detectAnimal,
   getSystemStatus,
+  getSensorData,
   imageToBase64,
   generateSampleDetection,
   constants

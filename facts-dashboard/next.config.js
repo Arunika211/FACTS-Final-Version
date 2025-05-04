@@ -9,12 +9,10 @@ const nextConfig = {
     unoptimized: true, // Untuk static export
   },
   
-  // Konfigurasi untuk GitHub Pages
-  basePath: '/FACTS-Final-Version', // Ganti dengan nama repo GitHub Anda
-  assetPrefix: '/FACTS-Final-Version/', // Ganti dengan nama repo GitHub Anda
-  
-  // Gunakan output statis
-  output: 'export',
+  // Hapus konfigurasi yang tidak diperlukan untuk Vercel
+  // basePath: '/FACTS-Final-Version',
+  // assetPrefix: '/FACTS-Final-Version/',
+  // output: 'export',
   
   async rewrites() {
     return [
