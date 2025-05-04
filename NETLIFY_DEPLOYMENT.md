@@ -76,6 +76,16 @@ Jika mendapatkan peringatan "Unrecognized key(s) in object: 'swcMinify'", pastik
 ### Masalah Node.js Version
 Pastikan `NODE_VERSION` di `netlify.toml` sudah diset ke "20.0.0" dan field `engines` di `package.json` juga diset ke ">=20.0.0".
 
+### Masalah Versi Python
+Netlify memiliki dukungan terbatas untuk versi Python. Untuk menghindari error versi Python:
+- Gunakan versi Python yang didukung Netlify (misalnya 3.8.x atau 3.9.x)
+- Tetapkan di `netlify.toml`:
+  ```toml
+  [build.environment]
+    PYTHON_VERSION = "3.9.14"
+  ```
+- Hindari menggunakan versi Python yang belum dirilis secara stabil (seperti 3.13.x)
+
 ### Masalah TypeScript Linting
 Jika mendapatkan error build karena masalah TypeScript linting, ada beberapa solusi:
 

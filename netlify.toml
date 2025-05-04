@@ -8,6 +8,7 @@
   NEXT_TELEMETRY_DISABLED = "1"
   CI = "false"
   NEXT_IGNORE_TS_ERRORS = "true"
+  PYTHON_VERSION = "3.9.14"
 
 # Pengaturan untuk Next.js
 [build.processing]
