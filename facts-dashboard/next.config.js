@@ -1,7 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
-  swcMinify: true,
+  // swcMinify dinonaktifkan karena tidak kompatibel dengan Next.js 15.3.1
   async rewrites() {
     return [
       {

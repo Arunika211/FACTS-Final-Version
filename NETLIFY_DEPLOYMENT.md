@@ -66,6 +66,13 @@ Jika mendapatkan error "Module not found" untuk komponen UI, pastikan direktori 
 - `label.jsx`
 - `spinner.jsx`
 
+Jika mendapatkan error "Module not found: Can't resolve '@/lib/utils'", pastikan:
+1. Direktori `src/lib` sudah ada
+2. File `utils.js` sudah ada di direktori tersebut dengan fungsi `cn` yang dibutuhkan
+
+### Masalah next.config.js
+Jika mendapatkan peringatan "Unrecognized key(s) in object: 'swcMinify'", pastikan untuk menghapus opsi `swcMinify` dari file `next.config.js` karena tidak kompatibel dengan Next.js 15.3.1.
+
 ### Masalah Node.js Version
 Pastikan `NODE_VERSION` di `netlify.toml` sudah diset ke "20.0.0" dan field `engines` di `package.json` juga diset ke ">=20.0.0".
 
