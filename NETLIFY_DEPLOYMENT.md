@@ -76,6 +76,23 @@ Jika mendapatkan peringatan "Unrecognized key(s) in object: 'swcMinify'", pastik
 ### Masalah Node.js Version
 Pastikan `NODE_VERSION` di `netlify.toml` sudah diset ke "20.0.0" dan field `engines` di `package.json` juga diset ke ">=20.0.0".
 
+### Masalah TypeScript Linting
+Jika mendapatkan error build karena masalah TypeScript linting, ada beberapa solusi:
+
+1. **Solusi untuk Deployment Cepat:**
+   - Gunakan flag `--no-lint` pada perintah build di `package.json`: 
+     ```json
+     "scripts": {
+       "build": "next build --no-lint"
+     }
+     ```
+   - Atur variabel lingkungan `CI=false` dan `NEXT_IGNORE_TS_ERRORS=true` di `netlify.toml`
+
+2. **Solusi Jangka Panjang:**
+   - Sesuaikan `.eslintrc.json` untuk mengatur aturan linting yang sesuai dengan kebutuhan proyek
+   - Perbaiki semua error TypeScript dalam kode sumber
+   - Perbarui `tsconfig.json` untuk mengatur opsi kompiler TypeScript
+
 ### Melalui Netlify CLI
 
 1. Install Netlify CLI:
