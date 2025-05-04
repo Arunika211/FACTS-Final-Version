@@ -1,4 +1,10 @@
 {
+  "name": "facts-dashboard",
+  "version": "1.0.0",
+  "description": "FACTS API - Animal Detection",
+  "scripts": {
+    "build": "pip install -r requirements.txt"
+  },
   "dependencies": {
     "react-icons": "^5.5.0"
   },
