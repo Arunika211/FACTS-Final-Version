@@ -11,6 +11,11 @@ const GRADIO_API_URL = process.env.NEXT_PUBLIC_GRADIO_API_URL || 'https://arunik
 const AVAILABLE_MODELS = (process.env.NEXT_PUBLIC_YOLO_MODELS || 'sapi,ayam,kambing,yolov5s').split(',');
 const DEFAULT_MODEL = process.env.NEXT_PUBLIC_DEFAULT_MODEL || 'sapi';
 
+// Status backend
+let isBackendAwake = false;
+let wakeUpAttempted = false;
+let lastWakeUpTime = 0;
+
 /**
  * Mengkonversi gambar ke format base64
  * @param {File} file - File gambar yang akan dikonversi
@@ -54,16 +59,20 @@ const fetchWithCORS = async (url, options = {}) => {
     
     // Jika gagal, coba gunakan CORS proxy
     const corsProxies = [
-      `https://cors-anywhere.herokuapp.com/${url}`,
+      `https://corsproxy.io/?${encodeURIComponent(url)}`,
       `https://api.allorigins.win/raw?url=${encodeURIComponent(url)}`,
-      `https://corsproxy.io/?${encodeURIComponent(url)}`
+      `https://cors-anywhere.herokuapp.com/${url}`
     ];
     
     // Coba setiap proxy sampai berhasil
     for (const proxyUrl of corsProxies) {
       try {
+        console.log(`Trying CORS proxy: ${proxyUrl}`);
         const proxyResponse = await fetch(proxyUrl, options);
-        if (proxyResponse.ok) return proxyResponse;
+        if (proxyResponse.ok) {
+          console.log(`Successfully used proxy: ${proxyUrl}`);
+          return proxyResponse;
+        }
       } catch (e) {
         console.warn(`Proxy ${proxyUrl} failed:`, e);
       }
@@ -74,6 +83,69 @@ const fetchWithCORS = async (url, options = {}) => {
     console.error('CORS fetch error:', error);
     throw error;
   }
+};
+
+/**
+ * Mencoba "membangunkan" Hugging Face Space yang mungkin "tidur"
+ * @returns {Promise<boolean>} - true jika berhasil membangunkan, false jika gagal
+ */
+export const wakeUpBackend = async () => {
+  // Hindari mencoba membangunkan terlalu sering (cooldown 30 detik)
+  const now = Date.now();
+  if (wakeUpAttempted && now - lastWakeUpTime < 30000) {
+    console.log('Wake up recently attempted, waiting for cooldown');
+    return false;
+  }
+  
+  wakeUpAttempted = true;
+  lastWakeUpTime = now;
+  console.log('Attempting to wake up Hugging Face Space...');
+  
+  // Lakukan beberapa request untuk membangunkan Space
+  try {
+    // Pertama coba request GET biasa ke URL Space
+    const wakeupResponse = await fetch(API_URL, { 
+      method: 'GET',
+      cache: 'no-store',
+      headers: {
+        'Cache-Control': 'no-cache'
+      }
+    });
+    
+    // Kemudian coba ping endpoint API predict dengan data minimal
+    await fetch(GRADIO_API_URL, {
+      method: 'POST',
+      cache: 'no-store',
+      headers: { 
+        'Content-Type': 'application/json',
+        'Cache-Control': 'no-cache'
+      },
+      body: JSON.stringify({
+        fn_index: 1, // get_system_status memiliki overhead rendah
+        data: [],
+      }),
+    });
+    
+    // Tunggu 5 detik untuk memberi waktu Space diinisialisasi
+    await new Promise(resolve => setTimeout(resolve, 5000));
+    
+    // Cek apakah sekarang sudah bangun
+    const checkResponse = await fetch(`${API_URL}/status`, { 
+      method: 'GET',
+      cache: 'no-store'
+    });
+    
+    if (checkResponse.ok) {
+      console.log('Backend successfully woken up!');
+      isBackendAwake = true;
+      return true;
+    }
+  } catch (error) {
+    console.warn('Failed to wake up backend:', error);
+  }
+  
+  console.log('Could not wake up backend, will use simulation mode');
+  return false;
 };
 
 /**
@@ -99,6 +171,11 @@ export const detectAnimal = async (imageFile, model = DEFAULT_MODEL) => {
       base64Image = await imageToBase64(imageFile);
     }
 
+    // Coba bangunkan backend jika belum pernah dicoba
+    if (!isBackendAwake && !wakeUpAttempted) {
+      await wakeUpBackend();
+    }
+    
     // Panggil API Gradio dengan CORS handling
     console.log(`Calling Gradio API with model: ${model}`);
     
@@ -114,9 +191,20 @@ export const detectAnimal = async (imageFile, model = DEFAULT_MODEL) => {
       });
       
       const result = await response.json();
+      isBackendAwake = true; // Jika berhasil, tandai bahwa backend sudah bangun
       return result.data;
     } catch (error) {
       console.warn('Direct API call failed, using simulation mode:', error);
+      
+      // Coba bangunkan lagi jika gagal dan belum mencoba sebelumnya
+      if (!wakeUpAttempted) {
+        const awakened = await wakeUpBackend();
+        if (awakened) {
+          // Coba lagi setelah membangunkan
+          return await detectAnimal(imageFile, model);
+        }
+      }
+      
       // Fallback ke mode simulasi jika API call gagal
       return generateSampleDetection(model);
     }
@@ -132,6 +220,11 @@ export const detectAnimal = async (imageFile, model = DEFAULT_MODEL) => {
  */
 export const getSystemStatus = async () => {
   try {
+    // Coba bangunkan backend jika belum pernah dicoba
+    if (!isBackendAwake && !wakeUpAttempted) {
+      await wakeUpBackend();
+    }
+    
     const response = await fetchWithCORS(GRADIO_API_URL, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -142,10 +235,26 @@ export const getSystemStatus = async () => {
     });
 
     const result = await response.json();
+    isBackendAwake = true; // Jika berhasil, tandai bahwa backend sudah bangun
     return result.data;
   } catch (error) {
     console.error('Error getting system status:', error);
-    return '### Error\nGagal mendapatkan status sistem. API mungkin sedang offline atau terjadi masalah CORS.';
+    
+    // Coba bangunkan lagi jika gagal dan belum mencoba sebelumnya
+    if (!wakeUpAttempted) {
+      const awakened = await wakeUpBackend();
+      if (awakened) {
+        // Coba lagi setelah membangunkan
+        return await getSystemStatus();
+      }
+    }
+    
+    return '### Status Sistem (Mode Simulasi)\n\n' +
+           '- **Backend**: ❌ Tidak tersedia (menggunakan mode simulasi)\n' +
+           '- **Simulasi**: ✅ Aktif\n' +
+           '- **Models**: Menggunakan data contoh\n\n' +
+           '> *Catatan: Backend mungkin sedang offline atau terjadi masalah CORS. ' +
+           'Aplikasi berjalan dalam mode simulasi dengan data contoh.*';
   }
 };
 
@@ -156,12 +265,28 @@ export const getSystemStatus = async () => {
  */
 export const getSensorData = async (limit = 50) => {
   try {
+    // Coba bangunkan backend jika belum pernah dicoba
+    if (!isBackendAwake && !wakeUpAttempted) {
+      await wakeUpBackend();
+    }
+    
     // Coba dengan fetchWithCORS untuk mengatasi masalah CORS
     const response = await fetchWithCORS(`${API_URL}/sensor-data?limit=${limit}`);
     const data = await response.json();
+    isBackendAwake = true; // Jika berhasil, tandai bahwa backend sudah bangun
     return data;
   } catch (error) {
     console.error('Error fetching sensor data:', error);
+    
+    // Coba bangunkan lagi jika gagal dan belum mencoba sebelumnya
+    if (!wakeUpAttempted) {
+      const awakened = await wakeUpBackend();
+      if (awakened) {
+        // Coba lagi setelah membangunkan
+        return await getSensorData(limit);
+      }
+    }
+    
     // Buat data dummy sebagai fallback
     return generateDummySensorData(limit);
   }
@@ -213,11 +338,36 @@ export const generateSampleDetection = (model = DEFAULT_MODEL) => {
   ];
 };
 
+/**
+ * Cek apakah backend sedang aktif/online
+ * @returns {Promise<boolean>} - true jika backend online, false jika offline
+ */
+export const isBackendOnline = async () => {
+  if (isBackendAwake) return true;
+  
+  try {
+    const awakened = await wakeUpBackend();
+    return awakened;
+  } catch (error) {
+    console.error('Error checking backend status:', error);
+    return false;
+  }
+};
+
 // Ekspor konstanta
 export const constants = {
   AVAILABLE_MODELS,
   DEFAULT_MODEL
 };
+
+// Coba bangunkan backend saat modul dimuat
+wakeUpBackend().then(success => {
+  if (success) {
+    console.log('Backend woken up on module load');
+  } else {
+    console.log('Backend could not be woken up on module load');
+  }
+});
 
 export default {
   detectAnimal,
@@ -225,5 +375,7 @@ export default {
   getSensorData,
   imageToBase64,
   generateSampleDetection,
+  isBackendOnline,
+  wakeUpBackend,
   constants
 }; 
