@@ -9,7 +9,8 @@
     "dev": "next dev --turbopack",
     "build": "next build --no-lint",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "export": "next build && next export -o out"
   },
   "dependencies": {
     "@types/plotly.js": "^2.35.5",
