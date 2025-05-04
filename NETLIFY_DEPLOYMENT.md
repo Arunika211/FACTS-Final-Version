@@ -27,7 +27,47 @@ Berikut adalah langkah-langkah untuk mendeploy aplikasi FACTS API ke Netlify:
 4. Otentikasi dengan akun GitHub baru Anda yang berisi repository proyek ini
 5. Pilih repository yang telah Anda buat
 6. Netlify akan otomatis mendeteksi file konfigurasi `netlify.toml` dan mengatur deployment
-7. Klik "Deploy site"
+7. Tambahkan environment variables yang diperlukan di Netlify:
+   - Buka site settings > Environment variables
+   - Tambahkan variabel dari file `.env.local` yang ada di direktori `facts-dashboard`
+8. Klik "Deploy site"
+
+### Pengaturan Environment Variables
+
+Pastikan untuk menambahkan environment variables berikut di dashboard Netlify:
+- `NEXT_PUBLIC_GEMINI_API_KEY` 
+- `NEXT_PUBLIC_API_URL`
+- `NEXT_PUBLIC_GRADIO_API_URL`
+- `NEXT_PUBLIC_YOLO_MODELS`
+- `NEXT_PUBLIC_DEFAULT_MODEL`
+- `NEXT_PUBLIC_APP_NAME`
+- `NEXT_PUBLIC_APP_VERSION`
+
+## Catatan Penting
+
+- Aplikasi di Netlify memiliki batas ukuran fungsi sebesar 50MB, sehingga tidak semua fitur akan berfungsi
+- Model-model machine learning seperti YOLO tidak dapat berjalan di Netlify Functions
+- Deployment ini cocok untuk endpoint-endpoint API sederhana atau front-end aplikasi
+- Pastikan menggunakan Node.js versi 20+ karena Next.js memerlukan minimal Node.js 18.18.0
+- Komponen UI yang diperlukan telah dibuat di `src/components/ui/` - pastikan folder ini ada sebelum deploy
+
+## Troubleshooting
+
+### Masalah Module Not Found
+Jika mendapatkan error "Module not found" untuk komponen UI, pastikan direktori `src/components/ui/` berisi file-file berikut:
+- `card.jsx`
+- `button.jsx`
+- `input.jsx`
+- `select.jsx`
+- `badge.jsx`
+- `alert.jsx`
+- `tabs.jsx`
+- `switch.jsx`
+- `label.jsx`
+- `spinner.jsx`
+
+### Masalah Node.js Version
+Pastikan `NODE_VERSION` di `netlify.toml` sudah diset ke "20.0.0" dan field `engines` di `package.json` juga diset ke ">=20.0.0".
 
 ### Melalui Netlify CLI
 
