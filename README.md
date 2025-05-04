@@ -1,3 +1,76 @@
+---
+title: FACTS API - Animal Detection
+emoji: 🐄
+colorFrom: blue
+colorTo: green
+sdk: gradio
+sdk_version: 3.50.2
+app_file: app.py
+pinned: false
+---
+
+# FACTS API - Animal Detection
+
+API berbasis Gradio untuk deteksi hewan (sapi, ayam, kambing) menggunakan model YOLO.
+
+## Fitur
+
+- Deteksi hewan dengan model YOLOv5
+- Upload gambar untuk deteksi
+- Visualisasi hasil deteksi dengan bounding box
+- Status model dan sistem
+
+## Cara Penggunaan
+
+1. Upload gambar yang ingin dideteksi
+2. Pilih model yang ingin digunakan (sapi, ayam, kambing, atau YOLOv5s)
+3. Klik "Submit" dan lihat hasilnya
+
+## Kode Integrasi
+
+Aplikasi ini juga dapat diintegrasikan dengan aplikasi Next.js melalui API Gradio:
+
+```javascript
+// Contoh di Next.js
+const API_URL = "https://yourusername-facts-api.hf.space";
+
+// Fungsi untuk mengonversi gambar ke base64
+function imageToBase64(file) {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => {
+      const base64 = reader.result.split(',')[1];
+      resolve(base64);
+    };
+    reader.onerror = error => reject(error);
+  });
+}
+
+// Deteksi menggunakan API Gradio
+async function detectAnimal(imageFile, model = "sapi") {
+  const base64Image = await imageToBase64(imageFile);
+  
+  // Menggunakan API Gradio
+  const response = await fetch(`${API_URL}/api/predict`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      data: [base64Image, model]
+    })
+  });
+  
+  return await response.json();
+}
+```
+
+## Pengembangan Lokal
+
+```bash
+pip install -r requirements.txt
+python app.py
+```
+
 # FACTS (Farm Animal Control and Tracking System)
 
 Sistem monitoring dan deteksi ternak berbasis AI untuk memantau kondisi lingkungan kandang dan mendeteksi ternak melalui kamera atau video. Aplikasi ini menggunakan model YOLO untuk deteksi dan tracking hewan ternak dengan teknologi BoT-SORT.
