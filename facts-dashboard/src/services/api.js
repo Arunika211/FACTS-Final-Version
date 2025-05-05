@@ -735,6 +735,134 @@ export const isBackendOnline = async () => {
   }
 };
 
+/**
+ * Format timestamp ke format yang lebih mudah dibaca
+ * @param {string} timestamp - ISO timestamp string
+ * @returns {string} - Formatted timestamp
+ */
+export const formatTimestamp = (timestamp) => {
+  const date = new Date(timestamp);
+  const now = new Date();
+  const yesterday = new Date(now);
+  yesterday.setDate(yesterday.getDate() - 1);
+  
+  const isToday = date.getDate() === now.getDate() && 
+                 date.getMonth() === now.getMonth() && 
+                 date.getFullYear() === now.getFullYear();
+  
+  const isYesterday = date.getDate() === yesterday.getDate() && 
+                     date.getMonth() === yesterday.getMonth() && 
+                     date.getFullYear() === yesterday.getFullYear();
+  
+  // Format tanggal dan waktu Indonesia
+  const timeStr = date.toLocaleTimeString('id-ID', {
+    hour: '2-digit',
+    minute: '2-digit'
+  });
+  
+  if (isToday) {
+    return `Hari ini, ${timeStr}`;
+  } else if (isYesterday) {
+    return `Kemarin, ${timeStr}`;
+  } else {
+    return date.toLocaleDateString('id-ID', {
+      day: 'numeric',
+      month: 'short',
+      hour: '2-digit',
+      minute: '2-digit'
+    });
+  }
+};
+
+/**
+ * Menghasilkan analisis AI berdasarkan data sensor
+ * @param {Object} data - Data sensor untuk dianalisis
+ * @param {string} animalType - Jenis hewan
+ * @returns {Promise<Object>} - Hasil analisis
+ */
+export const generateAIAnalysis = async (data, animalType) => {
+  // Dalam mode simulasi, berikan analisis statis
+  if (SIMULATION_MODE) {
+    console.log('Menghasilkan analisis AI (simulasi)');
+    
+    // Persiapkan analisis berdasarkan jenis hewan
+    const analysisData = {
+      sapi: {
+        title: "Analisis Kesehatan Sapi",
+        summary: "Berdasarkan pola data sensor, kondisi sapi dalam keadaan normal.",
+        recommendations: [
+          "Pertahankan jadwal makan teratur",
+          "Pastikan ketersediaan air bersih",
+          "Monitor suhu kandang saat siang hari"
+        ],
+        health_score: 85 + Math.floor(Math.random() * 10)
+      },
+      ayam: {
+        title: "Analisis Kesehatan Ayam",
+        summary: "Perilaku ayam menunjukkan pola aktivitas normal dengan sedikit peningkatan pada sore hari.",
+        recommendations: [
+          "Jaga kelembaban kandang 50-70%",
+          "Tingkatkan ventilasi kandang saat siang",
+          "Pertahankan jadwal pemberian pakan"
+        ],
+        health_score: 80 + Math.floor(Math.random() * 15)
+      },
+      kambing: {
+        title: "Analisis Kesehatan Kambing",
+        summary: "Kambing menunjukkan pola makan dan aktivitas yang konsisten.",
+        recommendations: [
+          "Berikan cukup ruang untuk bergerak",
+          "Jaga kebersihan kandang",
+          "Periksa kualitas pakan secara berkala"
+        ],
+        health_score: 82 + Math.floor(Math.random() * 12)
+      }
+    };
+    
+    // Tambahkan waktu analisis
+    const result = {
+      ...analysisData[animalType] || analysisData.sapi,
+      timestamp: new Date().toISOString(),
+      generated_by: "FACTS AI (Simulation)",
+      simulation: true
+    };
+    
+    // Simulasi penundaan
+    await new Promise(resolve => setTimeout(resolve, 500));
+    
+    return result;
+  }
+  
+  try {
+    // Kode asli untuk menghubungi API (jika tidak dalam mode simulasi)
+    const response = await fetchWithCORS(`${API_URL}/analyze`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ data, animalType })
+    });
+    
+    const result = await response.json();
+    return result;
+  } catch (error) {
+    console.error('Error generating AI analysis:', error);
+    
+    // Fallback ke data simulasi
+    return {
+      title: `Analisis Kesehatan ${animalType.charAt(0).toUpperCase() + animalType.slice(1)}`,
+      summary: "Tidak dapat mengakses API analisis. Menggunakan data simulasi sebagai fallback.",
+      recommendations: [
+        "Pantau kondisi hewan secara langsung",
+        "Pertahankan jadwal pemberian pakan",
+        "Pastikan lingkungan kandang dalam kondisi baik"
+      ],
+      health_score: 75 + Math.floor(Math.random() * 10),
+      timestamp: new Date().toISOString(),
+      generated_by: "FACTS AI (Fallback)",
+      simulation: true
+    };
+  }
+};
+
 // Ekspor konstanta
 export const constants = {
   AVAILABLE_MODELS,
@@ -763,5 +891,7 @@ export default {
   fetchCVActivity,
   sendTestSensorData,
   generateBatchSensorData,
-  constants
+  constants,
+  formatTimestamp,
+  generateAIAnalysis
 }; 
