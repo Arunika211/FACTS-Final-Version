@@ -20,6 +20,7 @@
     "NEXT_PUBLIC_GRADIO_API_URL": "https://arunika211-facts-api.hf.space/api/predict",
     "NEXT_TELEMETRY_DISABLED": "1",
     "NEXT_IGNORE_TS_ERRORS": "true",
-    "CI": "false"
+    "CI": "false",
+    "NEXT_PUBLIC_SIMULATION_MODE": "true"
   }
 } 

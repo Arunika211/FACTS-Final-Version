@@ -92,13 +92,32 @@ export default function Dashboard() {
       const sensorData = await fetchSensorData();
       const cvData = await fetchCVActivity(selectedAnimal);
       
+      // Verifikasi bahwa data yang diterima adalah array
+      if (!Array.isArray(sensorData)) {
+        console.error('Sensor data bukan array:', sensorData);
+        startTransition(() => {
+          setSensorCount(0);
+          setLastUpdated(new Date());
+        });
+        return;
+      }
+      
+      if (!Array.isArray(cvData)) {
+        console.error('CV data bukan array:', cvData);
+        startTransition(() => {
+          setCvCount(0);
+          setLastUpdated(new Date());
+        });
+        return;
+      }
+      
       // Filter by selected animal
       const filteredSensorData = sensorData.filter(item => 
-        item.ternak?.toLowerCase() === selectedAnimal.toLowerCase()
+        item && item.ternak?.toLowerCase() === selectedAnimal.toLowerCase()
       );
       
-      const filteredCvData = cvData.filter((item: any) => 
-        item.ternak?.toLowerCase() === selectedAnimal.toLowerCase()
+      const filteredCvData = cvData.filter(item => 
+        item && item.ternak?.toLowerCase() === selectedAnimal.toLowerCase()
       );
       
       // Update state with transition to reduce visual jank/flashing
@@ -110,7 +129,7 @@ export default function Dashboard() {
     } catch (error) {
       console.error('Error loading data counts:', error);
       if (isOnline) {
-        setStatusMessage('Error refreshing data. Please check your connection.');
+        setStatusMessage('Error refreshing data. Menggunakan mode simulasi.');
         setTimeout(() => setStatusMessage(null), 3000);
       }
     }

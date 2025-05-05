@@ -51,31 +51,37 @@ const MonitoringTab: React.FC<MonitoringTabProps> = ({
 
   // Fetch sensor data
   useEffect(() => {
-    const loadData = async () => {
+    const loadSensorData = async () => {
       try {
-        setLoading(true);
+        // Pastikan fungsi fetchSensorData dipanggil dengan benar
+        // Periksa apakah fetchSensorData menerima parameter
         const data = await fetchSensorData();
         
+        // Validasi data
+        if (!Array.isArray(data)) {
+          console.error('Received non-array sensor data:', data);
+          return;
+        }
+        
         // Filter data by selected animal
-        const filteredData = data.filter(item => 
-          item.ternak?.toLowerCase() === selectedAnimal.toLowerCase()
-        );
+        const validData = data
+          .filter(item => item && item.timestamp && item.ternak?.toLowerCase() === selectedAnimal.toLowerCase());
         
         // Sort by timestamp (newest first)
-        filteredData.sort((a, b) => 
+        validData.sort((a, b) => 
           new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime()
         );
         
         // Hanya update state jika data benar-benar berbeda
-        if (JSON.stringify(filteredData) !== JSON.stringify(sensorDataRef.current)) {
-          sensorDataRef.current = filteredData;
-          setSensorData(filteredData);
+        if (JSON.stringify(validData) !== JSON.stringify(sensorDataRef.current)) {
+          sensorDataRef.current = validData;
+          setSensorData(validData);
           
-          if (filteredData.length > 0 && 
+          if (validData.length > 0 && 
               (!latestDataRef.current || 
-               new Date(filteredData[0].timestamp).getTime() !== new Date(latestDataRef.current.timestamp).getTime())) {
-            latestDataRef.current = filteredData[0];
-            setLatestData(filteredData[0]);
+               new Date(validData[0].timestamp).getTime() !== new Date(latestDataRef.current.timestamp).getTime())) {
+            latestDataRef.current = validData[0];
+            setLatestData(validData[0]);
           }
         }
         
@@ -88,10 +94,10 @@ const MonitoringTab: React.FC<MonitoringTabProps> = ({
       }
     };
 
-    loadData();
+    loadSensorData();
     
     // Set up polling based on real-time setting
-    const interval = setInterval(loadData, isRealTime ? 5000 : 30000);
+    const interval = setInterval(loadSensorData, isRealTime ? 5000 : 30000);
     
     return () => clearInterval(interval);
   }, [selectedAnimal, isRealTime]);
@@ -102,21 +108,30 @@ const MonitoringTab: React.FC<MonitoringTabProps> = ({
       try {
         const data = await fetchCVActivity(selectedAnimal);
         
+        // Validasi data
+        if (!Array.isArray(data)) {
+          console.error('Received non-array CV data:', data);
+          return;
+        }
+        
+        // Pastikan setiap item memiliki timestamp
+        const validData = data.filter(item => item && item.timestamp);
+        
         // Sort by timestamp (newest first)
-        data.sort((a, b) => 
+        validData.sort((a, b) => 
           new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime()
         );
         
         // Hanya update state jika data benar-benar berbeda
-        if (JSON.stringify(data) !== JSON.stringify(cvDataRef.current)) {
-          cvDataRef.current = data;
-          setCvData(data);
+        if (JSON.stringify(validData) !== JSON.stringify(cvDataRef.current)) {
+          cvDataRef.current = validData;
+          setCvData(validData);
           
-          if (data.length > 0 && 
+          if (validData.length > 0 && 
               (!latestCvDataRef.current || 
-               new Date(data[0].timestamp).getTime() !== new Date(latestCvDataRef.current.timestamp).getTime())) {
-            latestCvDataRef.current = data[0];
-            setLatestCvData(data[0]);
+               new Date(validData[0].timestamp).getTime() !== new Date(latestCvDataRef.current.timestamp).getTime())) {
+            latestCvDataRef.current = validData[0];
+            setLatestCvData(validData[0]);
           }
         }
       } catch (err) {

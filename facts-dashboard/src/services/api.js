@@ -11,6 +11,9 @@ const GRADIO_API_URL = process.env.NEXT_PUBLIC_GRADIO_API_URL || 'https://arunik
 const AVAILABLE_MODELS = (process.env.NEXT_PUBLIC_YOLO_MODELS || 'sapi,ayam,kambing,yolov5s').split(',');
 const DEFAULT_MODEL = process.env.NEXT_PUBLIC_DEFAULT_MODEL || 'sapi';
 
+// Mode simulasi - jika true, gunakan data simulasi tanpa mencoba koneksi ke backend
+const SIMULATION_MODE = process.env.NEXT_PUBLIC_SIMULATION_MODE === 'true';
+
 // Status backend
 let isBackendAwake = false;
 let wakeUpAttempted = false;
@@ -264,6 +267,12 @@ export const getSystemStatus = async () => {
  * @returns {Promise<Array>} - Array data sensor
  */
 export const fetchSensorData = async (animalType) => {
+  // Gunakan mode simulasi jika diaktifkan
+  if (SIMULATION_MODE) {
+    console.log('Menggunakan mode simulasi untuk data sensor');
+    return generateSimulatedSensorData(animalType);
+  }
+  
   try {
     if (!isBackendAwake && !wakeUpAttempted) {
       await wakeUpBackend();
@@ -276,6 +285,13 @@ export const fetchSensorData = async (animalType) => {
     const response = await fetchWithCORS(url);
     const data = await response.json();
     isBackendAwake = true;
+    
+    // Pastikan data adalah array sebelum mengembalikan
+    if (!Array.isArray(data)) {
+      console.warn('Response data bukan array:', data);
+      return generateSimulatedSensorData(animalType);
+    }
+    
     return data;
   } catch (error) {
     console.error('Error fetching sensor data:', error);
@@ -298,6 +314,12 @@ export const fetchSensorData = async (animalType) => {
  * @returns {Promise<Array>} - Array data aktivitas CV
  */
 export const fetchCVActivity = async (animalType) => {
+  // Gunakan mode simulasi jika diaktifkan
+  if (SIMULATION_MODE) {
+    console.log('Menggunakan mode simulasi untuk data CV');
+    return generateSimulatedCVActivity(animalType);
+  }
+  
   try {
     if (!isBackendAwake && !wakeUpAttempted) {
       await wakeUpBackend();
@@ -310,6 +332,13 @@ export const fetchCVActivity = async (animalType) => {
     const response = await fetchWithCORS(url);
     const data = await response.json();
     isBackendAwake = true;
+    
+    // Pastikan data adalah array sebelum mengembalikan
+    if (!Array.isArray(data)) {
+      console.warn('Response data CV bukan array:', data);
+      return generateSimulatedCVActivity(animalType);
+    }
+    
     return data;
   } catch (error) {
     console.error('Error fetching CV activity:', error);
