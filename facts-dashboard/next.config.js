@@ -1,7 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
-  swcMinify: true, // Aktifkan SWC minify
   
   // Konfigurasi untuk Image
   images: {
