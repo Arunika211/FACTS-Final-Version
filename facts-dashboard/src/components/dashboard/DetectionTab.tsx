@@ -120,16 +120,22 @@ const DetectionTab: React.FC<DetectionTabProps> = ({
       try {
         const status = await checkYOLOStatus();
         setYoloStatus(status);
-        setIsYoloReady(status.available && status.models[selectedAnimal as keyof typeof status.models]);
+        
+        // Pastikan selectedAnimal adalah string yang valid sebelum menggunakannya
+        const animalType = selectedAnimal && typeof selectedAnimal === 'string' 
+          ? selectedAnimal.toLowerCase() 
+          : 'sapi';
+          
+        setIsYoloReady(status.available && status.models[animalType as keyof typeof status.models]);
         
         // Update mode based on YOLO availability
-        if (status.available && status.models[selectedAnimal as keyof typeof status.models]) {
+        if (status.available && status.models[animalType as keyof typeof status.models]) {
           if (mode === 'realtime') {
             setErrorMessage(null);
           }
         } else if (mode === 'realtime') {
           setMode('simulation');
-          setErrorMessage(`Model YOLO untuk ${selectedAnimal} tidak tersedia. Menggunakan mode simulasi.`);
+          setErrorMessage(`Model YOLO untuk ${animalType} tidak tersedia. Menggunakan mode simulasi.`);
         }
       } catch (error) {
         console.error('Error checking YOLO status:', error);
@@ -141,12 +147,18 @@ const DetectionTab: React.FC<DetectionTabProps> = ({
       }
     };
     
-    if (isServerConnected) {
+    // Periksa apakah dalam mode simulasi (dari env variable)
+    const isSimulationMode = process.env.NEXT_PUBLIC_SIMULATION_MODE === 'true';
+    
+    if (isServerConnected && !isSimulationMode) {
       checkStatus();
+    } else if (isSimulationMode) {
+      // Dalam mode simulasi, langsung tetapkan mode ke simulation
+      setMode('simulation');
     }
     
     const interval = setInterval(() => {
-      if (isServerConnected) {
+      if (isServerConnected && !isSimulationMode) {
         checkStatus();
       }
     }, 30000); // Check every 30 seconds

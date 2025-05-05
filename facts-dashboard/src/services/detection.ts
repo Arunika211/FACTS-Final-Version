@@ -1,9 +1,12 @@
 import axios from 'axios';
 
+// Cek apakah dalam mode simulasi
+const SIMULATION_MODE = process.env.NEXT_PUBLIC_SIMULATION_MODE === 'true';
+
 // Default configuration for API endpoints
 const API_CONFIG = {
-  host: 'localhost',
-  port: '5000',
+  host: SIMULATION_MODE ? 'localhost' : (process.env.NEXT_PUBLIC_API_URL || 'localhost').replace(/(http|https):\/\//, '').split(':')[0],
+  port: SIMULATION_MODE ? '5000' : '443',
 };
 
 // Axios instance dengan konfigurasi timeout yang lebih lama
@@ -15,10 +18,15 @@ const axiosInstance = axios.create({
   }
 });
 
-// API URL for CV activity
-const API_URL_CV = `http://${API_CONFIG.host}:${API_CONFIG.port}/cv-activity`;
+// API URL for CV activity - use full URL if available
+const API_URL_CV = SIMULATION_MODE 
+  ? `http://${API_CONFIG.host}:${API_CONFIG.port}/cv-activity`
+  : `${process.env.NEXT_PUBLIC_API_URL || 'https://arunika211-facts-api.hf.space'}/cv-activity`;
+
 // API URL for YOLO detection
-const API_URL_DETECTION = `http://${API_CONFIG.host}:${API_CONFIG.port}/detect`;
+const API_URL_DETECTION = SIMULATION_MODE
+  ? `http://${API_CONFIG.host}:${API_CONFIG.port}/detect`
+  : `${process.env.NEXT_PUBLIC_API_URL || 'https://arunika211-facts-api.hf.space'}/detect`;
 
 // Types for detection results
 export interface DetectionResult {
@@ -36,9 +44,16 @@ export interface DetectionResult {
  * Try to connect to the server
  */
 export const checkServerConnection = async (): Promise<boolean> => {
+  // Selalu kembalikan true dalam mode simulasi
+  if (SIMULATION_MODE) {
+    console.log('Running in simulation mode, skipping server connection check');
+    return false;
+  }
+  
   try {
     // Meningkatkan timeout menjadi 5 detik
-    await axiosInstance.get(`http://${API_CONFIG.host}:${API_CONFIG.port}/`, { timeout: 5000 });
+    const url = process.env.NEXT_PUBLIC_API_URL || 'https://arunika211-facts-api.hf.space';
+    await axiosInstance.get(url, { timeout: 5000 });
     return true;
   } catch (error) {
     console.error('Error connecting to server:', error);
@@ -50,6 +65,12 @@ export const checkServerConnection = async (): Promise<boolean> => {
  * Send detection result to the API
  */
 export const sendDetectionResult = async (detection: Omit<DetectionResult, 'timestamp'>): Promise<boolean> => {
+  // Dalam mode simulasi, selalu kembalikan true
+  if (SIMULATION_MODE) {
+    console.log('Running in simulation mode, skipping API call for sending detection');
+    return true;
+  }
+  
   try {
     // Check server connection first
     const isConnected = await checkServerConnection();
@@ -80,6 +101,12 @@ export const runYOLODetection = async (
   imageData: string, 
   modelType: 'sapi' | 'ayam' | 'kambing'
 ): Promise<DetectionResult[]> => {
+  // Selalu gunakan fallback dalam mode simulasi
+  if (SIMULATION_MODE) {
+    console.log('Running in simulation mode, using fallback detection');
+    return getFallbackDetection(modelType);
+  }
+  
   try {
     // Check server connection first
     const isConnected = await checkServerConnection();
