@@ -2,6 +2,9 @@ import type { Metadata, Viewport } from "next";
 import { Inter, Roboto_Mono } from "next/font/google";
 import "./globals.css";
 
+// Aktifkan dynamic rendering untuk mengatasi masalah fetch dengan revalidate: 0
+export const dynamic = 'force-dynamic';
+
 const inter = Inter({
   variable: "--font-inter",
   subsets: ["latin"],

@@ -1,5 +1,8 @@
 "use client";
 
+// Aktifkan dynamic rendering untuk mengatasi masalah fetch dengan revalidate: 0
+// export const dynamic = 'force-dynamic'; // Tidak perlu untuk "use client" component
+
 import { useState, useEffect, useCallback, useTransition } from 'react';
 import dynamic from 'next/dynamic';
 import { fetchSensorData, fetchCVActivity, sendTestSensorData, generateBatchSensorData } from '@/services/api';

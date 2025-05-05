@@ -26,6 +26,17 @@ const nextConfig = {
   // assetPrefix: '/FACTS-Final-Version/',
   // output: 'export',
   
+  // Konfigurasi server-side rendering dan dynamic fetching
+  experimental: {
+    serverActions: true,
+  },
+  
+  // Penting: Tetapkan runtime untuk app router
+  serverRuntimeConfig: {
+    // Konfigurasi yang hanya digunakan di server
+    apiUrl: process.env.NEXT_PUBLIC_API_URL || 'https://arunika211-facts-api.hf.space',
+  },
+  
   async headers() {
     return [
       {

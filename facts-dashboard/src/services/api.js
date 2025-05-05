@@ -49,9 +49,13 @@ const fetchWithCORS = async (url, options = {}) => {
     ...options,
     mode: 'cors',
     credentials: 'include',
+    cache: 'no-store',
+    next: { revalidate: false },
     headers: {
       ...options.headers,
       'Access-Control-Allow-Origin': '*',
+      'Cache-Control': 'no-cache, no-store, must-revalidate',
+      'Pragma': 'no-cache'
     }
   };
   
@@ -71,7 +75,7 @@ const fetchWithCORS = async (url, options = {}) => {
     for (const proxyUrl of corsProxies) {
       try {
         console.log(`Trying CORS proxy: ${proxyUrl}`);
-        const proxyResponse = await fetch(proxyUrl, options);
+        const proxyResponse = await fetch(proxyUrl, fetchOptions);
         if (proxyResponse.ok) {
           console.log(`Successfully used proxy: ${proxyUrl}`);
           return proxyResponse;
@@ -106,12 +110,14 @@ export const wakeUpBackend = async () => {
   
   // Lakukan beberapa request untuk membangunkan Space
   try {
-    // Pertama coba request GET biasa ke URL Space
+    // Pertama coba request GET biasa ke URL Space dengan opsi no-store
     const wakeupResponse = await fetch(API_URL, { 
       method: 'GET',
       cache: 'no-store',
+      next: { revalidate: false },
       headers: {
-        'Cache-Control': 'no-cache'
+        'Cache-Control': 'no-cache, no-store, must-revalidate',
+        'Pragma': 'no-cache'
       }
     });
     
@@ -119,9 +125,11 @@ export const wakeUpBackend = async () => {
     await fetch(GRADIO_API_URL, {
       method: 'POST',
       cache: 'no-store',
+      next: { revalidate: false },
       headers: { 
         'Content-Type': 'application/json',
-        'Cache-Control': 'no-cache'
+        'Cache-Control': 'no-cache, no-store, must-revalidate',
+        'Pragma': 'no-cache'
       },
       body: JSON.stringify({
         fn_index: 1, // get_system_status memiliki overhead rendah
@@ -132,10 +140,15 @@ export const wakeUpBackend = async () => {
     // Tunggu 5 detik untuk memberi waktu Space diinisialisasi
     await new Promise(resolve => setTimeout(resolve, 5000));
     
-    // Cek apakah sekarang sudah bangun
+    // Cek apakah sekarang sudah bangun dengan opsi no-store
     const checkResponse = await fetch(`${API_URL}/status`, { 
       method: 'GET',
-      cache: 'no-store'
+      cache: 'no-store',
+      next: { revalidate: false },
+      headers: {
+        'Cache-Control': 'no-cache, no-store, must-revalidate',
+        'Pragma': 'no-cache'
+      }
     });
     
     if (checkResponse.ok) {
