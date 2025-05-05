@@ -262,6 +262,38 @@ export const getSystemStatus = async () => {
 };
 
 /**
+ * Mendapatkan data simulasi dari localStorage untuk digunakan dalam mode simulasi
+ * @param {string} [animalType] - Jenis hewan (opsional)
+ * @returns {Array} - Array data sensor simulasi
+ */
+const getSimulatedDataFromStorage = (animalType) => {
+  try {
+    // Coba ambil data dari localStorage
+    const storedData = JSON.parse(localStorage.getItem('simulatedSensorData') || '[]');
+    
+    // Filter berdasarkan tipe hewan jika diperlukan
+    const filteredData = animalType
+      ? storedData.filter(item => item.ternak?.toLowerCase() === animalType.toLowerCase())
+      : storedData;
+    
+    if (filteredData.length > 0) {
+      console.log(`Menggunakan ${filteredData.length} data simulasi dari localStorage`);
+      return filteredData;
+    }
+  } catch (e) {
+    console.warn('Error mengambil data simulasi dari localStorage:', e);
+  }
+  
+  // Jika tidak ada data di localStorage atau terjadi error, buat data simulasi baru
+  const count = 10;
+  console.log(`Membuat ${count} data simulasi baru`);
+  
+  return animalType
+    ? generateSimulatedSensorData(animalType, count)
+    : generateDummySensorData(count);
+};
+
+/**
  * Mendapatkan data sensor dari API - YANG DITAMBAHKAN UNTUK KOMPATIBILITAS DENGAN page.tsx
  * @param {string} [animalType] - Jenis hewan (opsional)
  * @returns {Promise<Array>} - Array data sensor
@@ -270,7 +302,14 @@ export const fetchSensorData = async (animalType) => {
   // Gunakan mode simulasi jika diaktifkan
   if (SIMULATION_MODE) {
     console.log('Menggunakan mode simulasi untuk data sensor');
-    return generateSimulatedSensorData(animalType);
+    
+    // Coba dapatkan data dari localStorage terlebih dahulu
+    const simulatedData = getSimulatedDataFromStorage(animalType);
+    
+    // Jika tidak ada data dari localStorage, gunakan fungsi generateSimulatedSensorData
+    return simulatedData.length > 0
+      ? simulatedData
+      : generateSimulatedSensorData(animalType);
   }
   
   try {
@@ -361,6 +400,36 @@ export const fetchCVActivity = async (animalType) => {
  * @returns {Promise<boolean>} - true jika berhasil, false jika gagal
  */
 export const sendTestSensorData = async (animalType) => {
+  // Dalam mode simulasi, selalu kembalikan true
+  if (SIMULATION_MODE) {
+    console.log('Mode simulasi: Mengirim data uji (simulasi)');
+    
+    // Buat data simulasi untuk disimpan di localStorage
+    const testData = {
+      device_id: "SENSOR_TEST",
+      ternak: animalType,
+      timestamp: new Date().toISOString(),
+      temperature: 25 + Math.random() * 10,
+      humidity: 40 + Math.random() * 40,
+      light: 100 + Math.random() * 900,
+      soil_moisture: 20 + Math.random() * 60,
+      motion: Math.random() > 0.5,
+      simulation: true
+    };
+    
+    // Simpan data simulasi ke localStorage
+    try {
+      const storedData = JSON.parse(localStorage.getItem('simulatedSensorData') || '[]');
+      storedData.push(testData);
+      localStorage.setItem('simulatedSensorData', JSON.stringify(storedData));
+      console.log('Data simulasi disimpan ke localStorage:', testData);
+    } catch (e) {
+      console.warn('Error menyimpan data simulasi ke localStorage:', e);
+    }
+    
+    return true;
+  }
+  
   try {
     if (!isBackendAwake && !wakeUpAttempted) {
       await wakeUpBackend();
@@ -400,6 +469,41 @@ export const sendTestSensorData = async (animalType) => {
  * @returns {Promise<boolean>} - true jika berhasil, false jika gagal
  */
 export const generateBatchSensorData = async (animalType, count = 10) => {
+  // Dalam mode simulasi, selalu kembalikan true
+  if (SIMULATION_MODE) {
+    console.log(`Mode simulasi: Membuat ${count} data uji batch (simulasi)`);
+    
+    // Buat data simulasi untuk disimpan di localStorage
+    const batchData = Array.from({ length: count }, (_, i) => {
+      // Buat timestamp mundur dari sekarang
+      const timestamp = new Date(Date.now() - i * 60000).toISOString();
+      
+      return {
+        device_id: `BATCH_${i + 1}`,
+        ternak: animalType,
+        timestamp,
+        suhu: 25 + Math.random() * 10,
+        kelembaban: 40 + Math.random() * 40,
+        kualitas_udara: 100 + Math.random() * 900,
+        jarak_pakan: 10 + Math.random() * 10,
+        aktivitas: Math.floor(Math.random() * 10),
+        simulation: true
+      };
+    });
+    
+    // Simpan data simulasi ke localStorage
+    try {
+      const storedData = JSON.parse(localStorage.getItem('simulatedSensorData') || '[]');
+      batchData.forEach(data => storedData.push(data));
+      localStorage.setItem('simulatedSensorData', JSON.stringify(storedData));
+      console.log(`${count} data simulasi disimpan ke localStorage`);
+    } catch (e) {
+      console.warn('Error menyimpan data simulasi ke localStorage:', e);
+    }
+    
+    return true;
+  }
+  
   try {
     if (!isBackendAwake && !wakeUpAttempted) {
       await wakeUpBackend();
@@ -505,48 +609,52 @@ const generateSimulatedSensorData = (animalType, count = 10) => {
   const hourMs = 60 * 60 * 1000;
   
   // Set nilai berbeda berdasarkan jenis hewan
-  let tempRange, humidityRange, lightRange, soilRange;
+  let tempRange, humidityRange, airQualityRange, feedRange;
   
   switch (animalType?.toLowerCase()) {
     case 'sapi':
-      tempRange = [18, 25];
-      humidityRange = [40, 60];
-      lightRange = [100, 800];
-      soilRange = [30, 50];
+      tempRange = [38, 39.5];
+      humidityRange = [60, 80];
+      airQualityRange = [100, 300];
+      feedRange = [5, 20];
       break;
     case 'ayam':
-      tempRange = [25, 33];
+      tempRange = [40, 42];
       humidityRange = [50, 70];
-      lightRange = [200, 1000];
-      soilRange = [20, 40];
+      airQualityRange = [150, 350];
+      feedRange = [3, 15];
       break;
     case 'kambing':
-      tempRange = [20, 28];
-      humidityRange = [30, 55];
-      lightRange = [150, 900];
-      soilRange = [25, 45];
+      tempRange = [38.5, 40];
+      humidityRange = [60, 70];
+      airQualityRange = [120, 320];
+      feedRange = [4, 18];
       break;
     default:
-      tempRange = [20, 30];
-      humidityRange = [40, 70];
-      lightRange = [100, 900];
-      soilRange = [20, 60];
+      tempRange = [37, 40];
+      humidityRange = [50, 80];
+      airQualityRange = [100, 300];
+      feedRange = [5, 20];
   }
   
   return Array.from({ length: count }, (_, i) => {
     const timestamp = new Date(now - (i * hourMs));
+    // Acak sedikit nilai untuk variasi
+    const randomFactor = Math.random() * 0.2 + 0.9; // 0.9 - 1.1
+    
     return {
+      id: `sim-${Date.now()}-${i}`,
       device_id: "SIMULATOR",
       ternak: animalType || "tidak diketahui",
       timestamp: timestamp.toISOString(),
-      temperature: tempRange[0] + Math.random() * (tempRange[1] - tempRange[0]),
-      humidity: humidityRange[0] + Math.random() * (humidityRange[1] - humidityRange[0]),
-      light: lightRange[0] + Math.random() * (lightRange[1] - lightRange[0]),
-      soil_moisture: soilRange[0] + Math.random() * (soilRange[1] - soilRange[0]),
-      motion: Math.random() > 0.7,
+      suhu: tempRange[0] + Math.random() * (tempRange[1] - tempRange[0]) * randomFactor,
+      kelembaban: humidityRange[0] + Math.random() * (humidityRange[1] - humidityRange[0]) * randomFactor,
+      kualitas_udara: airQualityRange[0] + Math.random() * (airQualityRange[1] - airQualityRange[0]) * randomFactor,
+      jarak_pakan: feedRange[0] + Math.random() * (feedRange[1] - feedRange[0]) * randomFactor,
+      aktivitas: Math.floor(Math.random() * 10 * randomFactor),
       simulation: true
     };
-  }).reverse();
+  }).reverse(); // Terbaru dulu
 };
 
 /**
@@ -576,14 +684,17 @@ const generateSimulatedCVActivity = (animalType, count = 10) => {
     const confidence = 0.7 + Math.random() * 0.3; // 0.7 - 1.0
     
     return {
+      id: `sim-cv-${Date.now()}-${i}`,
       timestamp: timestamp.toISOString(),
       ternak: animalType || "tidak diketahui",
       activity: activity,
       confidence: confidence,
       detection_id: `sim-${Date.now()}-${i}`,
+      image_url: null, // Tidak ada gambar dalam simulasi
+      detected_count: Math.floor(Math.random() * 5) + 1,
       simulation: true
     };
-  }).reverse();
+  }).reverse(); // Terbaru dulu
 };
 
 /**
