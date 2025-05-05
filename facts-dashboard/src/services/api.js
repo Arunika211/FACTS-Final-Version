@@ -794,6 +794,11 @@ export const formatTimestamp = (timestamp) => {
  * @returns {Promise<Object>} - Hasil analisis
  */
 export const generateAIAnalysis = async (data, animalType) => {
+  // Pastikan animalType selalu string
+  const animalTypeStr = typeof animalType === 'string' ? 
+    animalType.toLowerCase() : 
+    (animalType ? String(animalType).toLowerCase() : 'sapi');
+  
   // Dalam mode simulasi, berikan analisis statis
   if (SIMULATION_MODE) {
     console.log('Menghasilkan analisis AI (simulasi)');
@@ -832,9 +837,12 @@ export const generateAIAnalysis = async (data, animalType) => {
       }
     };
     
+    // Validasi animalType dan fallback ke sapi jika tidak valid
+    const validAnimalType = ['sapi', 'ayam', 'kambing'].includes(animalTypeStr) ? animalTypeStr : 'sapi';
+    
     // Tambahkan waktu analisis
     const result = {
-      ...analysisData[animalType] || analysisData.sapi,
+      ...analysisData[validAnimalType],
       timestamp: new Date().toISOString(),
       generated_by: "FACTS AI (Simulation)",
       simulation: true
@@ -851,7 +859,7 @@ export const generateAIAnalysis = async (data, animalType) => {
     const response = await fetchWithCORS(`${API_URL}/analyze`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ data, animalType })
+      body: JSON.stringify({ data, animalType: animalTypeStr })
     });
     
     const result = await response.json();
@@ -859,9 +867,12 @@ export const generateAIAnalysis = async (data, animalType) => {
   } catch (error) {
     console.error('Error generating AI analysis:', error);
     
+    // Buat string dengan kapital di huruf pertama
+    const animalCapitalized = animalTypeStr.charAt(0).toUpperCase() + animalTypeStr.slice(1);
+    
     // Fallback ke data simulasi
     return {
-      title: `Analisis Kesehatan ${animalType.charAt(0).toUpperCase() + animalType.slice(1)}`,
+      title: `Analisis Kesehatan ${animalCapitalized}`,
       summary: "Tidak dapat mengakses API analisis. Menggunakan data simulasi sebagai fallback.",
       recommendations: [
         "Pantau kondisi hewan secara langsung",

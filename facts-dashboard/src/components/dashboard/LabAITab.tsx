@@ -1015,24 +1015,40 @@ const LabAITab: React.FC<LabAITabProps> = ({ selectedAnimal, theme, darkMode, on
   useEffect(() => {
     const loadData = async () => {
       setIsLoading(true);
+      setError(null);
+      
       try {
-        const data = await fetchSensorData();
-        const filteredData = data.filter(item => 
-          item.ternak?.toLowerCase() === selectedAnimal.toLowerCase()
-        );
-        setSensorData(filteredData);
+        const sensorData = await fetchSensorData();
         
-        // Simulasi data aktivitas ternak dari kamera (CV)
-        // Ini bisa diganti dengan API call asli ke endpoint CV jika tersedia
+        // Pastikan selectedAnimal adalah string
+        const animalTypeString = typeof selectedAnimal === 'string' ? selectedAnimal.toLowerCase() : String(selectedAnimal).toLowerCase();
+        
+        // Filter data berdasarkan jenis hewan
+        const filteredData = sensorData
+          .filter(item => {
+            // Pastikan item.ternak ada dan adalah string sebelum memanggil toLowerCase()
+            const itemTernak = item && item.ternak ? 
+              (typeof item.ternak === 'string' ? 
+                item.ternak.toLowerCase() : 
+                String(item.ternak).toLowerCase()
+              ) : '';
+            
+            return itemTernak === animalTypeString;
+          })
+          .sort((a, b) => new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime());
+        
+        setSensorData(filteredData);
         setCvData({
           aktivitas: `Terdeteksi ${Math.floor(Math.random() * 5) + 1} ${selectedAnimal}`,
           confidence: Math.random().toFixed(2)
         });
         
-        setError(null);
+        if (filteredData.length === 0) {
+          setError(`No data available for ${animalTypeString}. Please generate some data first.`);
+        }
       } catch (err) {
-        console.error('Error loading sensor data:', err);
-        setError('Failed to load sensor data. Please try again later.');
+        console.error('Error loading data:', err);
+        setError('Failed to load data. Please try again.');
       } finally {
         setIsLoading(false);
       }
