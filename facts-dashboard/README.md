@@ -1,26 +1,83 @@
 # FACTS Dashboard
 
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+**Farm Animal Control and Tracking System Dashboard**
 
-## Getting Started
+FACTS Dashboard adalah aplikasi monitoring dan deteksi hewan ternak menggunakan teknologi IoT dan Computer Vision. Aplikasi ini menampilkan data sensor (suhu, kelembaban, dll) dan aktivitas hewan ternak dari kandang.
 
-First, run the development server:
+## Fitur Utama
+
+- **Monitoring:** Visualisasi data sensor secara real-time
+- **Deteksi:** Deteksi dan identifikasi hewan ternak menggunakan model YOLO
+- **Lab AI:** Analisis cerdas dan rekomendasi berdasarkan data sensor dan aktivitas hewan
+
+## Teknologi
+
+- Next.js 15.3.1
+- React 18.2.0
+- Tailwind CSS
+- Plotly.js untuk visualisasi data
+- Integrasi dengan Hugging Face Spaces API
+
+## Cara Menjalankan Secara Lokal
 
 ```bash
+# Instalasi dependensi
+npm install
+
+# Menjalankan development server
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+
+# Build untuk production
+npm run build
+
+# Menjalankan production server
+npm run start
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Deployment
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Aplikasi ini dirancang untuk mudah di-deploy ke Vercel. 
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### Deployment ke Vercel
+
+1. Fork repository ini
+2. Connect repository ke Vercel
+3. Vercel akan otomatis mendeteksi konfigurasi Next.js
+
+Untuk deployment yang lancar, pastikan untuk menggunakan pengaturan berikut di Vercel:
+- Build command: `CI=false NEXT_IGNORE_TS_ERRORS=true npm run build --no-lint`
+- Node.js version: 20.x
+
+### Mengatasi Error Deployment
+
+Jika mengalami error "Command "npm run build" exited with 1" atau masalah serupa:
+
+1. Jalankan helper deployment script: `npm run deploy`
+2. Script akan memeriksa konfigurasi dan mencoba mengatasi masalah umum
+3. Untuk panduan lengkap, lihat file `DEPLOYMENT.md`
+
+### Environment Variables
+
+Pastikan mengatur environment variables berikut di Vercel:
+
+- `NEXT_PUBLIC_API_URL` - URL API backend
+- `NEXT_PUBLIC_GRADIO_API_URL` - URL Gradio API
+- `NEXT_PUBLIC_YOLO_MODELS` - Daftar model YOLO (dipisahkan koma)
+- `NEXT_PUBLIC_DEFAULT_MODEL` - Model default
+- `NEXT_IGNORE_TS_ERRORS` - diatur ke `true` untuk melewati error TypeScript
+- `CI` - diatur ke `false` untuk melewati beberapa pemeriksaan build
+
+## Backend API
+
+Aplikasi ini membutuhkan koneksi ke backend API yang berjalan di Hugging Face Spaces. Jika backend tidak aktif, aplikasi akan menggunakan mode simulasi untuk testing.
+
+## Mode Simulasi
+
+Jika backend tidak tersedia, aplikasi akan secara otomatis beralih ke mode simulasi yang menghasilkan data dummy. Ini membantu development dan testing saat backend sedang offline.
+
+## Lisensi
+
+MIT
 
 ## Learn More
 

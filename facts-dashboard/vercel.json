@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "buildCommand": "npm run build --no-lint",
+  "buildCommand": "CI=false npm run build",
   "outputDirectory": ".next",
   "framework": "nextjs",
   "regions": ["sin1"],
@@ -19,7 +19,7 @@
     "NEXT_PUBLIC_API_URL": "https://arunika211-facts-api.hf.space",
     "NEXT_PUBLIC_GRADIO_API_URL": "https://arunika211-facts-api.hf.space/api/predict",
     "NEXT_TELEMETRY_DISABLED": "1",
-    "CI": "false",
-    "NEXT_IGNORE_TS_ERRORS": "true"
+    "NEXT_IGNORE_TS_ERRORS": "true",
+    "CI": "false"
   }
 } 
